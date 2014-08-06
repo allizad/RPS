@@ -31,6 +31,7 @@ module RPS
           p2_move text,
           round_winner integer
           )])
+    end
       # USERS
       # GAMES
       # ROUNDS

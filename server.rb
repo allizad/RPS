@@ -16,6 +16,8 @@ end
 # Sign in
 get '/summary/:username' do
   # checks for user and password, if passes - goes to summary
+  # goes to datanbase to CHECK FOR USER
+  # returns username
   erb :summary
   # if it doesn't pass, alert issue
 end
@@ -23,17 +25,24 @@ end
 #Register to play - link in it to start a new game and see summaries
 # FIX ALL METHODS for interpolation
 post '/registration' do
-  # adds a new user
+  # PARAMS
+  # adds a new user - INITIALIZES a user into the database with proper number of arguments
   # goes to the registration page with information
   redirect to '/registration/#{params['username']}'
 end
 
 # on registration page - need to get to summary OR startplaying
 get '/summary/:username' do
+  # a lot happening here:
+    # needs to access the game id's that belong to this unique user.
+    # organizes that data based on status of game - if there's a winner or not on the game id
+    # grabs round ids that match game ids to populate numerical status of where the game is at (0/0 rounds, 2/4, etc)
+
   erb :summary
 end
 
 get '/start-game' do
+  # choose 
   erb :start_game
 end
 
@@ -41,6 +50,8 @@ end
 post '/game' do
   redirect to '/game/:game_id'
 end
+
+# some sort of post method for when a player makes a move in the game page
 
 get '/game/:game_id' do
   erb :game
