@@ -6,12 +6,22 @@
         <title>Rock | Paper | Scissors</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/foundation/css/style.css">
+        <link rel="stylesheet" href="/foundation/css/foundation.css" />
+        <link rel="stylesheet" href="/foundation/css/foundation.min.css" />
+        <link rel="stylesheet" href="/foundation/css/normalize.css" />
+        <script src="/foundation/js/vendor/modernizr.js"></script>
+
 
     </head>
     <body>
       <!-- body goes here -->
-      <% yield %>
+      <%= yield %>
       
-    </body>
+    <script src="./foundation/js/vendor/jquery.js"></script>
+    <script src="./foundation/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
 </html>

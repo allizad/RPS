@@ -1,7 +1,9 @@
 require 'sinatra'
+require 'rack-flash'
 require_relative 'lib/RPS.rb'
 
 set :sessions, true
+use Rack::Flash
 set :bind, '0.0.0.0'
 
 # main page - sign in or sign up
@@ -28,7 +30,7 @@ post '/registration' do
   # PARAMS
   # adds a new user - INITIALIZES a user into the database with proper number of arguments
   # goes to the registration page with information
-  redirect to '/registration/#{params['username']}'
+  redirect to "/registration/#{params['username']}"
 end
 
 # on registration page - need to get to summary OR startplaying

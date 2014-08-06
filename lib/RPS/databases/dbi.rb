@@ -35,6 +35,5 @@ module RPS
       # USERS
       # GAMES
       # ROUNDS
-    end
   end
 end

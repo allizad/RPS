@@ -1,8 +1,55 @@
-<div align="center">
-  <h2>Login</h2>
-  <form action='/signin' method='post'>
-    <input type='text' name='username' placeholder='Username'><br>
-    <input type='password' name='password' placeholder='Password'><br />
-    <input type='submit' value='Submit'>
-  </form>
+<div class="row hero">
+	<h1>Rock Paper Scissors</h1>
 </div>
+
+
+<div class="row sign-in"> <!-- START of login/register section -->
+
+<div class="large-6 medium-6 columns">
+ 	<h3>sign in</h3>
+ 	<form action='/summary' method='get'>
+ 	<div class="row"> <!-- row for sign in form -->
+ 	<div class="large-2 medium-2 small-2 columns"><br></div>
+ 	<div class="large-8 medium-8 small-8 columns">
+   		<input type='text' name='username' placeholder='Username'>
+   		<input type='password' name='password' placeholder='Password'>
+  </div>
+ 	<div class="large-2 medium-2 small-2 columns"><br></div>   
+ 	</div> <!-- end of sign-in form row -->
+
+ 	<div class="row"> <!-- row for login button -->
+ 		<!-- <div class="large-3 medium-3 small-3 columns"><br></div> -->
+		<input class="button radius" type='submit' value='LOGIN'>
+   	<!-- <div class="large-3 medium-3 small-3 columns"><br></div> -->
+  </div> <!-- end of row for login button -->
+   <% if flash[:alert] %>
+   <%= flash[:alert] %>
+ <% end %>
+ </form>
+</div>
+
+<div class="large-6 medium-6 columns">
+ 	<h3>register</h3>
+ 	<form action='/registration' method='post'>
+ 	<div class="row"> <!-- row for registration form -->
+ 	<div class="large-2 medium-2 small-2 columns"><br></div>
+	<div class="large-8 medium-8 small-8 columns">
+  <input type='text' name='username' placeholder='Username'>
+  <input type='password' name='password' placeholder='Password'>
+  <input type='password' name='password_confirmation' placeholder='Confirm Password'>
+  </div>
+ 	<div class="large-2 medium-2 small-2 columns"><br></div>  
+ 	</div><!-- END of row for registration form -->
+  <input class="button radius" type='submit' value='REGISTER'>
+  </br>
+  <% if flash[:alert] %>
+  <%= flash[:alert] %>
+ <% end %>
+ </form>
+</div>
+
+</div> <!-- END of login/register section -->
+
+<footer class="row"> <!-- START of footer -->
+	
+</footer> <!-- END of footer -->

@@ -1,6 +1,76 @@
+@import url(http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300italic|Raleway);
 
-$color: white;
+$light-gray: #A69A8F;
+$dark-gray: #5C554F;
+$gold: #CCA347;
+$gold-dark: #7F662C;
 
-.div {
-	background-color: $color;
+body {
+	display: block;
+	text-align: center;
+	margin: auto;
+}
+
+div.hero  {
+	h1 {
+		font-family: 'Josefin Sans', sans-serif;
+		font-weight: 700;
+		font-size: 5rem;
+		letter-spacing: 0.5rem;
+	}
+	padding: 3rem 1.62rem;
+	margin: none;
+}
+input.button.radius {
+	border-radius: 0.9rem;
+}
+div.sign-in {
+	h3 {
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 3.1rem;
+		font-variant: small-caps;
+		letter-spacing: -0.01rem;
+	}
+	input {
+		border: none;
+		box-shadow: none;
+		border-bottom: 1px solid $light-gray;
+		margin: auto;
+		.button .round {
+			width: 12.3rem;
+			border-radius: 2rem;
+		}
+	}
+	input.button.radius.large-6.medium-6.small-6.columns {
+		padding: 1rem;
+	}
+	button, .button {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+	}
+	// placeholder text styling
+	::-webkit-input-placeholder {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+	}
+
+	::-moz-placeholder {  /* Firefox 19+ */
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+	}
+
+	:-ms-input-placeholder {  
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+	}
+
 }
