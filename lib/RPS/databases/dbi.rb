@@ -32,8 +32,82 @@ module RPS
           round_winner integer
           )])
     end
-      # USERS
-      # GAMES
-      # ROUNDS
+
+    def register_user(user)
+        @db.exec_params(%q[
+        INSERT INTO users (username, password_digest)
+        VALUES ($1, $2);
+        ], [user.username, user.password_digest])
+    end
+
+    def get_user_by_username(username)
+      result = @db.exec(%Q[
+        SELECT * FROM users WHERE username = '#{username}';
+      ])
+
+      user_data = result.first
+
+      if user_data
+        build_user(user_data)
+      else
+        nil
+      end
+    end
+
+    def username_exists?(username)
+      result = @db.exec(%Q[
+        SELECT * FROM users WHERE username = '#{username}';
+      ])
+
+      if result.count > 0
+        true
+      else
+        false
+      end
+    end
+
+    def build_user(data)
+      RPS::User.new(data['username'], data['password_digest'])
+    end
+
+    def start_game(player1, player2)
+      @db.exec_params(%q[
+      INSERT INTO games (player1, player2)
+      VALUES ($1, $2);
+      ], [player1.user_id, player2.user_id])
+    end
+
+    def start_round(game_id, p1_move)
+      @db.exec_params(%q[
+        INSERT INTO rounds (game_id, p1_move)
+        VALUES ($1, $2);
+        ], [game_id, p1_move])
+    end
+
+    def finish_round(game_id, p2_move)
+      @db.exec_params(%q[
+        INSERT INTO rounds (game_id, p2_move)
+        VALUES ($1, $2);
+        ], [game_id, p2_move])  
+    end
+
+    def game_over?(game_id, player1, player2)
+      result = @db.exec(%Q[
+        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}';
+      ])
+
+      if result.count(player1.user_id) > 2
+        return true
+      elsif result.count(player2.user_id) > 2
+        return true
+      end
+    end
+  end
+# singleton creation
+  def self.dbi
+    @__db_instance ||= DBI.new
   end
 end
+
+
+
