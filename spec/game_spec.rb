@@ -6,19 +6,17 @@ describe RPS do
   describe Game do
 
     describe 'initialize' do
-
-      xit '' do
-
+      xit 'initializes with two players' do
       end
-
-      describe 'play' do
-
-
+      # xit 'returns false for incorrect number of arguments' do
+      # end
+    end
+    
+    describe 'play' do
+      xit '' do
       end
 
     end
-
-
   end
 end
 
