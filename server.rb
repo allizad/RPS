@@ -25,6 +25,7 @@ post '/summary' do
   end
 
   @user = RPS.dbi.get_user_by_username(params['username'])
+  
   if @user && @user.has_password?(params['password'])
     session['RPS'] = @user.username
     redirect to '/summary'
@@ -44,11 +45,7 @@ post '/registration' do
   # PARAMS
   # adds a new user - INITIALIZES a user into the database with proper number of arguments
   # goes to the registration page with information
-<<<<<<< HEAD
-  redirect to "/registration/#{params['username']}"
-=======
-
-if params['username'].empty? || params['password'].empty? || params['password_confirmation'].empty?
+  if params['username'].empty? || params['password'].empty? || params['password_confirmation'].empty?
     flash[:alert2] = "Please fill out all input fields."
     redirect to '/'
   end
@@ -67,8 +64,6 @@ if params['username'].empty? || params['password'].empty? || params['password_co
   end
 
   erb :registration
-
->>>>>>> 439a868369d521cb848c3888bfef0eccbaba253a
 end
 
 # on registration page - need to get to summary OR startplaying
@@ -89,7 +84,6 @@ end
 
 # from start game, you create a new game
 post '/game' do
-
   erb :game
 end
 
@@ -99,37 +93,8 @@ get '/game' do
   erb :game
 end
 
-<<<<<<< HEAD
-# post '/signup' do
-#   user = DBI::User.new(params['username'])
-#   user.update_password(params['password'])
-#   DBI.dbi.persist_user(user)
 
-#   redirect to '/'
-#   erb :signup
-# end
-
-# get '/signin' do
-#   erb :signin
-# end
-
-# post '/signin' do
-#   user = DBI.dbi.get_user_by_username(params['username'])
-#     if user && user.has_password?(params['password'])
-#       session['RPS'] = user.username
-#       redirect to '/'
-#     else
-#       "THAT'S NOT THE RIGHT PASSWORD!!!!"
-#     end
-# end
-
-# get '/signout' do
-#  session.clear
-#  redirect to '/'
-# end
-=======
 get '/signout' do
  session.clear
  redirect to '/'
 end
->>>>>>> 439a868369d521cb848c3888bfef0eccbaba253a
