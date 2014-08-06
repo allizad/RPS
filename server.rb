@@ -1,7 +1,9 @@
 require 'sinatra'
+require 'rack-flash'
 require_relative 'lib/RPS.rb'
 
 set :sessions, true
+use Rack::Flash
 set :bind, '0.0.0.0'
 
 # main page - sign in or sign up
@@ -16,8 +18,21 @@ end
 # Sign in
 get '/summary/:username' do
   # checks for user and password, if passes - goes to summary
+  if params['username'].empty? || params['password'].empty?
+    flash[:alert] = "Please fill out all input fields."
+    redirect to '/'
+  end
+
+  user = RPS.dbi.get_user_by_username(params['username'])
+  if user && user.has_password?(params['password'])
+    session['RPS'] = user.username
+    redirect to '/summary/#{params['username']}'
+  else   # if it doesn't pass, alert issue
+    flash[:alert] = "That is not the correct password, please try again."
+    # redirect to '/'
+  end
+
   erb :summary
-  # if it doesn't pass, alert issue
 end
 
 #Register to play - link in it to start a new game and see summaries
@@ -25,7 +40,25 @@ end
 post '/registration' do
   # adds a new user
   # goes to the registration page with information
-  redirect to '/registration/#{params['username']}'
+
+if params['username'].empty? || params['password'].empty? || params['password_confirmation'].empty?
+    flash[:alert] = "Please fill out all input fields."
+    redirect to '/'
+  end
+
+  if RPS.dbi.username_exists?(params['username'])
+    flash[:alert] = "Username already exists, choose another username."
+  elsif params['password'] == params['password_confirmation']
+    user = RPS::User.new(params['username'])
+    user.update_password(params['password'])
+    RPS.dbi.register_user(user)
+    session['RPS'] = user.username
+    redirect to '/registration/#{params['username']}'
+  else
+    flash[:alert] = "Passwords don't match.  Please try again."
+    redirect to '/'
+  end
+
 end
 
 # on registration page - need to get to summary OR startplaying
@@ -69,7 +102,7 @@ end
 #     end
 # end
 
-# get '/signout' do
-#  session.clear
-#  redirect to '/'
-# end
+get '/signout' do
+ session.clear
+ redirect to '/'
+end
