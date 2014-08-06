@@ -1,8 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300italic|Raleway);
 body {
   display: block;
-  text-align: center;
-  margin: auto; }
+  text-align: center; }
 
 div.hero {
   padding: 3rem 1.62rem;
@@ -33,7 +32,11 @@ div.sign-in input.button.radius.large-6.medium-6.small-6.columns {
   padding: 1rem; }
 div.sign-in button, div.sign-in .button {
   font-family: 'Raleway', sans-serif;
-  letter-spacing: 0.1rem; }
+  letter-spacing: 0.1rem;
+  background-color: #cca347;
+  margin-top: 2rem; }
+div.sign-in button, div.sign-in .button:hover {
+  background-color: #7f662c; }
 div.sign-in ::-webkit-input-placeholder {
   font-family: 'Raleway', sans-serif;
   letter-spacing: 0.1rem;
@@ -52,3 +55,14 @@ div.sign-in :-ms-input-placeholder {
   font-family: 'Raleway', sans-serif;
   letter-spacing: 0.1rem;
   text-align: center; }
+
+footer h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing: 0.05rem; }
+
+footer a {
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
+  letter-spacing: 0.1rem;
+  margin-right: 1rem;
+  margin-left: 1rem; }

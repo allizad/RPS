@@ -8,7 +8,7 @@ $gold-dark: #7F662C;
 body {
 	display: block;
 	text-align: center;
-	margin: auto;
+	// margin: auto;
 }
 
 div.hero  {
@@ -24,6 +24,7 @@ div.hero  {
 input.button.radius {
 	border-radius: 0.9rem;
 }
+// SIGN IN PAGE STYLING
 div.sign-in {
 	h3 {
 		font-family: 'Josefin Sans', sans-serif;
@@ -41,12 +42,18 @@ div.sign-in {
 			border-radius: 2rem;
 		}
 	}
+	// BUTTON STYLING
 	input.button.radius.large-6.medium-6.small-6.columns {
 		padding: 1rem;
 	}
 	button, .button {
 		font-family: 'Raleway', sans-serif;
 		letter-spacing: 0.1rem;
+		background-color: $gold;
+		margin-top: 2rem;
+	}
+	button, .button:hover{
+		background-color: $gold-dark;
 	}
 	// placeholder text styling
 	::-webkit-input-placeholder {
@@ -72,5 +79,16 @@ div.sign-in {
 		letter-spacing: 0.1rem;
 		text-align: center;
 	}
-
+}
+// Footer styling
+footer h3 {
+	font-family: 'Josefin Sans', sans-serif;
+	letter-spacing: 0.05rem;
+}
+footer 	a {
+	font-family: 'Raleway', sans-serif;
+	display: inline-block;
+	letter-spacing: 0.1rem;
+	margin-right: 1rem;
+	margin-left: 1rem;
 }
