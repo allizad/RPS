@@ -9,31 +9,29 @@ set :bind, '0.0.0.0'
 # main page - sign in or sign up
 get '/' do
  if session['RPS']
-   @user = DBI.dbi.get_user_by_username(session['RPS'])
+   @user = RPS.dbi.get_user_by_username(session['RPS'])
  end
  
   erb :index
 end
 
 # Sign in
-get '/summary/:username' do
+post '/summary' do
   # checks for user and password, if passes - goes to summary
 
   if params['username'].empty? || params['password'].empty?
-    flash[:alert] = "Please fill out all input fields."
+    flash[:alert1] = "Please fill out all input fields."
     redirect to '/'
   end
 
-  user = RPS.dbi.get_user_by_username(params['username'])
-  if user && user.has_password?(params['password'])
-    session['RPS'] = user.username
-    redirect to '/summary/#{params['username']}'
+  @user = RPS.dbi.get_user_by_username(params['username'])
+  if @user && @user.has_password?(params['password'])
+    session['RPS'] = @user.username
+    redirect to '/summary'
   else   # if it doesn't pass, alert issue
-    flash[:alert] = "That is not the correct password, please try again."
-    # redirect to '/'
+    flash[:alert1] = "That is not the correct password, please try again."
+    redirect to '/'
   end
-
-
   # goes to datanbase to CHECK FOR USER
   # returns username
 
@@ -48,27 +46,30 @@ post '/registration' do
   # goes to the registration page with information
 
 if params['username'].empty? || params['password'].empty? || params['password_confirmation'].empty?
-    flash[:alert] = "Please fill out all input fields."
+    flash[:alert2] = "Please fill out all input fields."
     redirect to '/'
   end
 
   if RPS.dbi.username_exists?(params['username'])
-    flash[:alert] = "Username already exists, choose another username."
+    flash[:alert2] = "Username already exists, choose another username."
+    redirect to '/'
   elsif params['password'] == params['password_confirmation']
-    user = RPS::User.new(params['username'])
-    user.update_password(params['password'])
-    RPS.dbi.register_user(user)
-    session['RPS'] = user.username
-    redirect to '/registration/#{params['username']}'
+    @user = RPS::User.new(params['username'])
+    @user.update_password(params['password'])
+    RPS.dbi.register_user(@user)
+    session['RPS'] = @user.username
   else
-    flash[:alert] = "Passwords don't match.  Please try again."
+    flash[:alert2] = "Passwords don't match.  Please try again."
     redirect to '/'
   end
+
+  erb :registration
 
 end
 
 # on registration page - need to get to summary OR startplaying
-get '/summary/:username' do
+get '/summary' do
+  #*************not sure if we need this anymore******
   # a lot happening here:
     # needs to access the game id's that belong to this unique user.
     # organizes that data based on status of game - if there's a winner or not on the game id
@@ -78,43 +79,21 @@ get '/summary/:username' do
 end
 
 get '/start-game' do
-  # choose 
+  # choose an opponent
   erb :start_game
 end
 
 # from start game, you create a new game
 post '/game' do
-  redirect to '/game/:game_id'
+
+  erb :game
 end
 
 # some sort of post method for when a player makes a move in the game page
 
-get '/game/:game_id' do
+get '/game' do
   erb :game
 end
-
-# post '/signup' do
-#   user = DBI::User.new(params['username'])
-#   user.update_password(params['password'])
-#   DBI.dbi.persist_user(user)
-
-#   redirect to '/'
-#   erb :signup
-# end
-
-# get '/signin' do
-#   erb :signin
-# end
-
-# post '/signin' do
-#   user = DBI.dbi.get_user_by_username(params['username'])
-#     if user && user.has_password?(params['password'])
-#       session['RPS'] = user.username
-#       redirect to '/'
-#     else
-#       "THAT'S NOT THE RIGHT PASSWORD!!!!"
-#     end
-# end
 
 get '/signout' do
  session.clear

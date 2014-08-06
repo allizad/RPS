@@ -1,8 +1,29 @@
+
+
 <div align="center">
   <h2>Login</h2>
-  <form action='/signin' method='post'>
+  <form action='/summary' method='post'>
     <input type='text' name='username' placeholder='Username'><br>
     <input type='password' name='password' placeholder='Password'><br />
-    <input type='submit' value='Submit'>
+    <input type='submit' value='Login'>
+    </br>
+    <% if flash[:alert1] %>
+    <%= flash[:alert1] %>
+  <% end %>
+  </form>
+</div>
+
+
+<div align="center">
+  <h2>Register</h2>
+  <form action='/registration' method='post'>
+    <input type='text' name='username' placeholder='Username'><br>
+    <input type='password' name='password' placeholder='Password'><br />
+    <input type='password' name='password_confirmation' placeholder='Confirm Password'><br />
+    <input type='submit' value='Register'>
+    </br>
+    <% if flash[:alert2] %>
+    <%= flash[:alert2] %>
+  <% end %>
   </form>
 </div>
