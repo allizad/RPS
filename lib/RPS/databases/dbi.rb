@@ -9,6 +9,10 @@ module RPS
     end
 
     def build_tables
+      @db.exec(%q[
+        CREATE TABLE IF NOT EXISTS users(
+          id serial NOT NULL PRIMARY KEY,
+          )])
       # USERS
       # GAMES
       # ROUNDS
