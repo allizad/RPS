@@ -8,7 +8,10 @@ body div.row {
   max-width: 100%; }
 
 div.hero {
-  padding: 3rem 1.62rem; }
+  background-image: url("../../img/large_rps.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 4.5rem 1.62rem; }
   div.hero h1 {
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 700;
@@ -59,6 +62,9 @@ div.row.sign-in :-ms-input-placeholder {
   letter-spacing: 0.1rem;
   text-align: center; }
 
+footer {
+  padding: 2rem; }
+
 footer h3 {
   font-family: 'Josefin Sans', sans-serif;
   letter-spacing: 0.05rem; }
@@ -84,17 +90,18 @@ div.row .game-div {
   div.row .game-div h3 {
     padding-bottom: 2.3rem;
     font-family: 'Raleway', sans-serif; }
-  div.row .game-div button.button {
+  div.row .game-div form div input.button {
+    font-family: 'Raleway', sans-serif;
     background-color: #cca347;
     width: 100%;
     border-radius: 0.9rem;
     letter-spacing: 0.1rem;
     margin-bottom: 0.5rem; }
-  div.row .game-div button.button:hover {
+  div.row .game-div form div input.button:hover {
     background-color: #7f662c; }
-  div.row .game-div button.button .disabled {
+  div.row .game-div form div input.button .disabled {
     background-color: #7f662c; }
-  div.row .game-div button.button .disabled:hover {
+  div.row .game-div form div input.button .disabled:hover {
     background-color: #7f662c; }
 
 div.opp-game p {

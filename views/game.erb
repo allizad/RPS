@@ -8,9 +8,15 @@
 
 <div class="large-4 medium-4 columns user-game"> <!-- USER div -->
 	<h3>Your Move</h3>
-		<button class="button radius" name="user_move" action="/" method="post">Rock</button>
-		<button class="button radius" name="user_move" action="/" method="post">Paper</button>
-		<button class="button radius" name="user_move" action="/" method="post">Scissors</button>
+		<form method="post" action="/move/rock">
+			<div><input class="button" type='submit' value='Rock'/></div>
+		</form>
+		<form method="post" action="/move/paper">
+			<div><input class="button" type='submit' value='Paper'/></div>
+		</form>
+		<form method="post" action="/move/scissors">
+			<div><input class="button" type='submit' value='Scissors'/></div>
+		</form>
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history"> <!-- game history div -->
 	<h3>Rounds</h3>
