@@ -8,9 +8,12 @@ $gold-dark: #7F662C;
 body {
 	display: block;
 	text-align: center;
-	// margin: auto;
 }
 
+body div.row {
+	margin: 0;
+	max-width: 100%;
+}
 div.hero  {
 	h1 {
 		font-family: 'Josefin Sans', sans-serif;
@@ -19,13 +22,12 @@ div.hero  {
 		letter-spacing: 0.5rem;
 	}
 	padding: 3rem 1.62rem;
-	margin: none;
 }
 input.button.radius {
 	border-radius: 0.9rem;
 }
 // SIGN IN PAGE STYLING
-div.sign-in {
+div.row.sign-in {
 	h3 {
 		font-family: 'Josefin Sans', sans-serif;
 		font-size: 3.1rem;
@@ -92,3 +94,58 @@ footer 	a {
 	margin-right: 1rem;
 	margin-left: 1rem;
 }
+// ____________________________________________________________________
+// GAME PAGE STYLING
+// ____________________________________________________________________
+div.row .game-page {
+	margin: 0;
+	padding: 0;
+}
+div.row .game-div {
+	font-family: 'Raleway', sans-serif;
+	background-color: $light-gray;
+	max-width: 100%;
+	margin-right: 0;
+	margin-left: 0;
+	padding-top: 2rem;
+	h3 {
+	padding-bottom: 2.3rem;
+	font-family: 'Raleway', sans-serif;		
+	}
+	button.button {
+		background-color: $gold;
+		width: 100%;
+		border-radius: 0.9rem;
+		letter-spacing: 0.1rem;
+		margin-bottom: 0.5rem;
+	}
+	button.button:hover {
+		background-color: $gold-dark;
+	}
+	button.button .disabled {
+		background-color: $gold-dark;
+	}
+	button.button .disabled:hover {
+		background-color: $gold-dark;
+	}
+}
+div.opp-game {
+	p {
+		font-size: 2rem;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

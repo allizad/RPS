@@ -1,16 +1,69 @@
 
-<div class="row">
-<div class="row"> <!-- game title header -->
-<div class="large-4 medium-4 columns"> 
-	
-</div>
-<div class="large-4 medium-4 columns">
-	
-</div>
-<div class="large-4 medium-4 columns">
-	
-</div>
-</div> <!-- END OF game title header -->
+<div class="row game-page">
+	<div class="row hero"> <!-- game header title -->
+		<h1>SHOOT!</h1>
+	</div> <!-- END game header title -->
+<div class="row game-div"> <!-- game stuff -->
+
+
+<div class="large-4 medium-4 columns user-game"> <!-- USER div -->
+	<h3>Your Move</h3>
+		<button class="button radius" name="user_move" action="/" method="post">Rock</button>
+		<button class="button radius" name="user_move" action="/" method="post">Paper</button>
+		<button class="button radius" name="user_move" action="/" method="post">Scissors</button>
+</div> <!-- END of USER div -->
+<div class="large-4 medium-4 columns game-history"> <!-- game history div -->
+	<h3>Rounds</h3>
+	<table class="row large">
+		<thead>
+			<th>Round</th>
+			<th>Your Move</th>
+			<th>Opponent Move</th>
+			<th>Winner</th>
+		</thead>
+		<tbody>
+			<tr>
+			<!-- these data spots will be embedded with ruby -->
+				<td>1</td>
+				<td>paper</td>
+				<td>rock</td>
+				<td>you!</td>
+			</tr>			
+			<tr>
+				<td>2</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
+			<tr>
+				<td>3</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
+			<tr>
+				<td>4</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
+			<tr>
+				<td>5</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
+		</tbody>
+	</table>
+
+</div> <!-- END OF game history div -->
+
+<div class="large-4 medium-4 columns opp-game"> <!-- Opponent Div -->
+	<h3>Opponent Move</h3>
+	<p>Waiting<br>...</p>
+</div><!-- end of opponent div -->
+</div> <!-- END OF game stuff -->
 </div>
 
 <!-- gets round info from database -->
