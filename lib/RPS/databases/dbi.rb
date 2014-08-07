@@ -87,22 +87,60 @@ module RPS
       result.first['game_id']
     end
 
-    def start_round(game_id, p1_move)
-      @db.exec_params(%q[
-        INSERT INTO rounds (game_id, p1_move)
-        VALUES ($1, $2);
-        ], [game_id, p1_move])
+    def has_rounds?(game_id)
+      result = @db.exec(%q[
+        SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
+        ])
+      if result.first == nil
+        return false
+      else
+        return true
+      end
     end
 
-    def finish_round(game_id, p2_move)
-      @db.exec_params(%q[
-        INSERT INTO rounds (game_id, p2_move)
-        VALUES ($1, $2);
-        ], [game_id, p2_move])  
+    def active_rounds?(game_id)
+      result = @db.exec(%q[
+        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}'
+        ])
+
     end
 
-    def play_move(move)
-      
+    def get_all_rounds_for_game_id(game_id)
+        result = @db.exec(%q[
+        SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
+        ])
+        return result
+    end
+
+    def start_round(game_id)
+      result = @db.exec_params(%q[
+        INSERT INTO rounds (game_id)
+        VALUES ($1)
+        RETURNING round_id;
+        ], [game_id])
+
+      result.first['round_id']
+    end
+
+    def player1_move(round_id, game_id, move)
+      @db.exec_params(%q[
+        INSERT INTO rounds (round_id, game_id, p1_move)
+        VALUES ($1, $2, $3);
+        ], [round_id, game_id, move])
+    end
+
+    def player2_move(round_id, game_id, move)
+      @db.exec_params(%q[
+        INSERT INTO rounds (round_id, game_id, p2_move)
+        VALUES ($1, $2, $4);
+        ], [round_id, game_id, move])
+    end 
+
+    def player_1?()
+      @db.exec_params(%q[
+        SELECT player1 FROM rounds WHERE game_id = 
+        ])
+      #return true if nothing in player 1 spot
     end
 
     def game_over?(game_id, player1, player2)

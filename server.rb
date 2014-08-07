@@ -53,23 +53,38 @@ get '/new-game' do
   erb :new_game
 end
 
-# from new game, you create a game
+# from new game, you create a game with opponent
 get '/game/:username' do
-  @opponent_username = params[:username]
+  # @opponent_username = params[:username]
   @game = RPS.dbi.start_game(session['RPS_session'], params[:username])
 
-  redirect to "/game/#{@opponent_username}/#{@game}"
+  redirect to "/game/#{params[:username]}/#{@game}"
 end
 
 get '/game/:username/:game_id' do
-  
+  # method that automatically check the dbi to update any info => return a @variable 
+  @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])  
+
+  @round = RPS.dbi.start_round(params[:game_id])
+
+  redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{@round}"
+end
+
+get '/game/:username/:game_id/:round_id' do
+
   erb :game
 end
 
-post '/move/rock' do
-  @move = 
+get '/move/:move' do
+  @move = params[:move]
+
 
   redirect to '/game'
+end
+
+get '/game' do
+
+erb :game
 end
 
 

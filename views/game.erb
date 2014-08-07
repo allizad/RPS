@@ -7,10 +7,17 @@
 
 
 <div class="large-4 medium-4 columns user-game"> <!-- USER div -->
-	<h3>Your Move</h3>
+<!-- 	<h3>Your Move</h3>
 		<button class="button radius" name="user_move" action="/" method="post">Rock</button>
 		<button class="button radius" name="user_move" action="/" method="post">Paper</button>
-		<button class="button radius" name="user_move" action="/" method="post">Scissors</button>
+		<button class="button radius" name="user_move" action="/" method="post">Scissors</button> -->
+
+	<% moves_array = ["rock", "paper", "scissors"] %>
+    <% moves_array.each do |move| %>
+    <a class="button" href="/move/<%= move %>"><%=move%></a>
+    <%end%>
+
+
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history"> <!-- game history div -->
 	<h3>Rounds</h3>
