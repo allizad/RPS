@@ -19,9 +19,9 @@ module RPS
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS games(
           game_id serial NOT NULL PRIMARY KEY,
-          p1_id integer,
-          p2_id integer,
-          game_winner integer
+          player1 text,
+          player2 text,
+          game_winner text
           )])
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS rounds(
@@ -29,7 +29,7 @@ module RPS
           game_id integer,
           p1_move text,
           p2_move text,
-          round_winner integer
+          round_winner text
           )])
     end
 
@@ -77,11 +77,11 @@ module RPS
       return result
     end
 
-    def start_game(player1, player2)
+    def start_game(player1_username, player2_username)
       @db.exec_params(%q[
       INSERT INTO games (player1, player2)
       VALUES ($1, $2);
-      ], [player1.user_id, player2.user_id])
+      ], [player1_username, player2_username])
     end
 
     def start_round(game_id, p1_move)

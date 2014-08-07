@@ -46,10 +46,18 @@ post '/register' do
   end
 end
 
+# choose an opponent
 get '/new-game' do
   @opponents = RPS.dbi.opponent_list(session['RPS_session'])
-  # choose an opponent
+
   erb :new_game
+end
+
+# from new game, you create a new game
+post '/game' do
+  @game = RPS.dbi.start_game(session['RPS_session'], params['username'])
+
+  erb :game
 end
 
 get '/game' do
@@ -60,10 +68,7 @@ post '/move/rock' do
 
 end
 
-# from start game, you create a new game
-post '/game' do
-  erb :game
-end
+
 
 get '/signout' do
  session.clear
