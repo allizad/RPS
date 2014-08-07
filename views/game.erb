@@ -3,25 +3,29 @@
 	<div class="row hero"> <!-- game header title -->
 		<h1>SHOOT!</h1>
 	</div> <!-- END game header title -->
-<div class="row game-div"> <!-- game stuff -->
+<div class="row game-div" data-equalizer> <!-- game stuff -->
 
-
-<div class="large-4 medium-4 columns user-game"> <!-- USER div -->
-<!-- 	<h3>Your Move</h3>
-		<button class="button radius" name="user_move" action="/" method="post">Rock</button>
-		<button class="button radius" name="user_move" action="/" method="post">Paper</button>
-		<button class="button radius" name="user_move" action="/" method="post">Scissors</button> -->
-
+<div class="large-4 medium-4 columns user-game" data-equalizer-watch> <!-- USER div -->
+	<h3>Your Move</h3>
+<!-- 		<form method="post" action="/move/rock">
+			<div><input class="button" type='submit' value='Rock'/></div>
+		</form>
+		<form method="post" action="/move/paper">
+			<div><input class="button" type='submit' value='Paper'/></div>
+		</form>
+		<form method="post" action="/move/scissors">
+			<div><input class="button" type='submit' value='Scissors'/></div>
+		</form> -->
+		<% @rounds_so_far_info %>
 	<% moves_array = ["rock", "paper", "scissors"] %>
-    <% moves_array.each do |move| %>
-    <a class="button" href="/move/<%= move %>"><%=move%></a>
-    <%end%>
-
+	<% moves_array.each do |m| %>
+		<a class="button" href="/#{@rounds_so_far_info[:username]}/:game_id/:round_id/<%= m %>"><%=m%></a>
+	<%end%>
 
 </div> <!-- END of USER div -->
-<div class="large-4 medium-4 columns game-history"> <!-- game history div -->
+<div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
 	<h3>Rounds</h3>
-	<table class="row large">
+	<table>
 		<thead>
 			<th>Round</th>
 			<th>Your Move</th>
@@ -31,32 +35,31 @@
 		<tbody>
 			<tr>
 			<!-- these data spots will be embedded with ruby -->
-				<td>1</td>
+				<td class="round-number">1</td>
 				<td>paper</td>
 				<td>rock</td>
 				<td>you!</td>
 			</tr>			
 			<tr>
-				<td>2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td>3</td>
+				<td class="round-number">2</td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>			
 			<tr>
-				<td>4</td>
+				<td class="round-number">3</td>
 				<td></td>
 				<td></td>
 				<td></td>
 			</tr>			
 			<tr>
-				<td>5</td>
+				<td class="round-number">4</td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>			
+			<tr>
+				<td class="round-number">5</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -66,11 +69,11 @@
 
 </div> <!-- END OF game history div -->
 
-<div class="large-4 medium-4 columns opp-game"> <!-- Opponent Div -->
+<div class="large-4 medium-4 columns opp-game" data-equalizer-watch> <!-- Opponent Div -->
 	<h3>Opponent Move</h3>
 	<p>Waiting<br>...</p>
 </div><!-- end of opponent div -->
-</div> <!-- END OF game stuff -->
+</div> <!-- END OF game-div -->
 </div>
 
 <!-- gets round info from database -->

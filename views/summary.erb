@@ -1,17 +1,28 @@
 
 
-<div align="center">
-  <h2>Welcome <%= @user.username %>! </h2>
+<div class="row welcome-hero hero">
+  <h1>Welcome, <%= @user.username %>! </h1>
 </div>
 
+<div class="row new-game"> <!-- new game button directing to list of users -->
 <form action="/new-game" method="get">
 	<button class="button" id="new_game">Start New Game</button>
 </form>
+</div> <!-- END of new game button directing to list of users -->
 
 <!-- div showing games in progress that are your turn -->
 
+<div class="row">
+	
+</div>
+
 <!-- div showing games in progress that are opponents turn -->
+<div class="row">
+	
+</div>
 
 <!-- div showing past games -->
-
+<div class="row">
+	
+</div>
 
