@@ -5,11 +5,14 @@
 
 <!-- prints out usernames of people in the database (can click on them?)-->
 
-<form action="/game" method="post">
-	<button class="button" id="opponent">Opponent</button>
+<!-- <form action="/game" method="post">
+	<button class="button" id="opponent" value="chrisoen">chrisoen</button>
 </form>
 
-<% @opponents.each do |i| %>
-	<div><input type="radio" name="opponent" value="<%= i['username_id']%>"/><%= i['username']%></div>
-	<%end$>
+<a class="button" href="/game/<%= @username %>"></a> -->
+
+<% @opponents.each do |x| %>
+<a class="button" href="/game/<%= x['username'] %>"><%=x['username']%></a>
+	<%end%>
+
 

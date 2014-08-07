@@ -46,19 +46,32 @@ post '/register' do
   end
 end
 
+# choose an opponent
 get '/new-game' do
-  # choose an opponent
+  @opponents = RPS.dbi.opponent_list(session['RPS_session'])
+
   erb :new_game
 end
 
-get '/game' do
+# from new game, you create a game
+get '/game/:username' do
+  @opponent_username = params[:username]
+  @game = RPS.dbi.start_game(session['RPS_session'], params[:username])
+
+  redirect to "/game/#{@opponent_username}/#{@game}"
+end
+
+get '/game/:username/:game_id' do
+  
   erb :game
 end
 
-# from start game, you create a new game
-post '/game' do
-  erb :game
+post '/move/rock' do
+  @move = 
+
+  redirect to '/game'
 end
+
 
 get '/signout' do
  session.clear

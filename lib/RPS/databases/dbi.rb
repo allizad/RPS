@@ -19,9 +19,9 @@ module RPS
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS games(
           game_id serial NOT NULL PRIMARY KEY,
-          p1_id integer,
-          p2_id integer,
-          game_winner integer
+          player1 text,
+          player2 text,
+          game_winner text
           )])
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS rounds(
@@ -29,7 +29,7 @@ module RPS
           game_id integer,
           p1_move text,
           p2_move text,
-          round_winner integer
+          round_winner text
           )])
     end
 
@@ -70,11 +70,21 @@ module RPS
       RPS::User.new(data['username'], data['password_digest'])
     end
 
-    def start_game(player1, player2)
-      @db.exec_params(%q[
+    def opponent_list(session_username)
+      result = @db.exec_params(%Q[
+        SELECT username FROM users WHERE username != $1;
+      ],[session_username])
+      return result
+    end
+
+    def start_game(player1_username, player2_username)
+      result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
-      VALUES ($1, $2);
-      ], [player1.user_id, player2.user_id])
+      VALUES ($1, $2)
+      RETURNING game_id;
+      ], [player1_username, player2_username])
+
+      result.first['game_id']
     end
 
     def start_round(game_id, p1_move)
@@ -89,6 +99,10 @@ module RPS
         INSERT INTO rounds (game_id, p2_move)
         VALUES ($1, $2);
         ], [game_id, p2_move])  
+    end
+
+    def play_move(move)
+      
     end
 
     def game_over?(game_id, player1, player2)
