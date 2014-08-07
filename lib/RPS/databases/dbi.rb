@@ -98,7 +98,7 @@ module RPS
       end
     end
 
-    def active_rounds?(game_id)
+    def active_rounds?(game_id)D
       result = @db.exec_params(%q[
         SELECT round_winner FROM rounds WHERE game_id = ($1);
         ], [game_over])
@@ -106,7 +106,7 @@ module RPS
 
     def get_all_rounds_for_game_id(game_id)
         result = @db.exec_params(%q[
-        SELECT round_id FROM rounds WHERE game_id = ($1);
+        SELECT * FROM rounds WHERE game_id = $1;
         ], [game_id])
         return result
     end
