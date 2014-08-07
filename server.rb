@@ -6,75 +6,43 @@ set :sessions, true
 use Rack::Flash
 set :bind, '0.0.0.0'
 
-# main page - sign in or sign up
+# main page - sign in or register
 get '/' do
- if session['RPS']
-   @user = RPS.dbi.get_user_by_username(session['RPS'])
+ if session['RPS_session']
+   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
  end
  
   erb :index
 end
 
-# Sign in
-post '/summary' do
-  # checks for user and password, if passes - goes to summary
-
-  if params['username'].empty? || params['password'].empty?
-    flash[:alert1] = "Please fill out all input fields."
-    redirect to '/'
-  end
-
-  @user = RPS.dbi.get_user_by_username(params['username'])
-  
-  if @user && @user.has_password?(params['password'])
-    session['RPS'] = @user.username
-    redirect to '/summary'
-  else   # if it doesn't pass, alert issue
-    flash[:alert1] = "That is not the correct password, please try again."
-    redirect to '/'
-  end
-  # goes to datanbase to CHECK FOR USER
-  # returns username
-
-  erb :summary
-end
-
-#Register to play - link in it to start a new game and see summaries
-# FIX ALL METHODS for interpolation
-post '/registration' do
-  # PARAMS
-  # adds a new user - INITIALIZES a user into the database with proper number of arguments
-  # goes to the registration page with information
-  if params['username'].empty? || params['password'].empty? || params['password_confirmation'].empty?
-    flash[:alert2] = "Please fill out all input fields."
-    redirect to '/'
-  end
-
-  if RPS.dbi.username_exists?(params['username'])
-    flash[:alert2] = "Username already exists, choose another username."
-    redirect to '/'
-  elsif params['password'] == params['password_confirmation']
-    @user = RPS::User.new(params['username'])
-    @user.update_password(params['password'])
-    RPS.dbi.register_user(@user)
-    session['RPS'] = @user.username
-  else
-    flash[:alert2] = "Passwords don't match.  Please try again."
-    redirect to '/'
-  end
-
-  erb :registration
-end
-
-# on registration page - need to get to summary OR startplaying
 get '/summary' do
-  #*************not sure if we need this anymore******
-  # a lot happening here:
-    # needs to access the game id's that belong to this unique user.
-    # organizes that data based on status of game - if there's a winner or not on the game id
-    # grabs round ids that match game ids to populate numerical status of where the game is at (0/0 rounds, 2/4, etc)
-
   erb :summary
+end
+
+# Sign in - checks for user and password, goes to summary
+post '/signin' do
+  sign_in = RPS::SignIn.run(params)
+
+  if sign_in[:success?]
+    session['RPS_session'] = sign_in[:session_id]
+    redirect to '/summary'
+  else
+    flash[:alert1] = sign_in[:error]
+    redirect to '/'
+  end
+end
+
+#Register to play - goes straight to summary page
+post '/registration' do
+  register = RPS::Register.run(params)
+
+  if register[:success?]
+    session['RPS_session'] = register[:session_id]
+    redirect to '/summary'
+  else
+    flash[:alert2] = register[:error]
+    redirect to '/'
+  end
 end
 
 get '/start-game' do
@@ -82,17 +50,14 @@ get '/start-game' do
   erb :start_game
 end
 
-# from start game, you create a new game
-post '/game' do
-  erb :game
-end
-
-# some sort of post method for when a player makes a move in the game page
-
 get '/game' do
   erb :game
 end
 
+# from start game, you create a new game
+post '/game' do
+  erb :game
+end
 
 get '/signout' do
  session.clear
