@@ -53,21 +53,24 @@ get '/new-game' do
   erb :new_game
 end
 
-# from new game, you create a new game
-post '/game' do
-  @game = RPS.dbi.start_game(session['RPS_session'], params['username'])
+# from new game, you create a game
+get '/game/:username' do
+  @opponent_username = params[:username]
+  @game = RPS.dbi.start_game(session['RPS_session'], params[:username])
 
-  erb :game
+  redirect to "/game/#{@opponent_username}/#{@game}"
 end
 
-get '/game' do
+get '/game/:username/:game_id' do
+  
   erb :game
 end
 
 post '/move/rock' do
+  @move = 
 
+  redirect to '/game'
 end
-
 
 
 get '/signout' do

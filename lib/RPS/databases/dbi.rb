@@ -78,10 +78,13 @@ module RPS
     end
 
     def start_game(player1_username, player2_username)
-      @db.exec_params(%q[
+      result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
-      VALUES ($1, $2);
+      VALUES ($1, $2)
+      RETURNING game_id;
       ], [player1_username, player2_username])
+
+      result.first['game_id']
     end
 
     def start_round(game_id, p1_move)
