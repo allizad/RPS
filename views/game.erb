@@ -16,7 +16,7 @@
 		<form method="post" action="/move/scissors">
 			<div><input class="button" type='submit' value='Scissors'/></div>
 		</form> -->
-		<% @rounds_so_far_info %>
+		<% @game_rounds %>
 	<% moves_array = ["rock", "paper", "scissors"] %>
 	<% moves_array.each do |m| %>
 		<a class="button" href="/#{@rounds_so_far_info[:username]}/:game_id/:round_id/<%= m %>"><%=m%></a>
@@ -77,4 +77,4 @@
 </div>
 
 <!-- gets round info from database -->
-
+<div><% @game_rounds %></div>

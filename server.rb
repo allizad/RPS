@@ -61,26 +61,29 @@ get '/game/:username' do
   redirect to "/game/#{params[:username]}/#{@game}"
 end
 
+# this is a stepping stone- only 'rendered' when you create a new game 
 get '/game/:username/:game_id' do
-  # method that automatically check the dbi to update any info => return a @variable 
-  @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])  
-
-  @round = RPS.dbi.start_round(params[:game_id])
+  # starts a new round!
+  @round = RPS.dbi.start_round(params[:game_id].to_i)
 
   redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{@round}"
 end
 
 get '/game/:username/:game_id/:round_id' do
-
+  game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id].to_i)
   erb :game
 end
 
+# Play moves to a specific round
+
 get '/move/:move' do
   @move = params[:move]
-
-
-  redirect to '/game'
+  # tell database that 
+  # interpolate the vales
+  redirect to '/:game_id/:round_id'
 end
+
+# render the game page
 
 get '/game' do
 

@@ -41,9 +41,9 @@ module RPS
     end
 
     def get_user_by_username(username)
-      result = @db.exec(%Q[
-        SELECT * FROM users WHERE username = '#{username}';
-      ])
+      result = @db.exec.exec_params(%Q[
+        SELECT * FROM users WHERE username = ($1);
+      ], [username])
 
       user_data = result.first
 
@@ -55,9 +55,9 @@ module RPS
     end
 
     def username_exists?(username)
-      result = @db.exec(%Q[
-        SELECT * FROM users WHERE username = '#{username}';
-      ])
+      result = @db.exec_params(%Q[
+        SELECT * FROM users WHERE username = ($1);
+      ], [username])
 
       if result.count > 0
         true
@@ -88,9 +88,9 @@ module RPS
     end
 
     def has_rounds?(game_id)
-      result = @db.exec(%q[
-        SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
-        ])
+      result = @db.exec_params(%q[
+        SELECT round_id FROM rounds WHERE game_id = ($1);
+        ], [game_id])
       if result.first == nil
         return false
       else
@@ -99,16 +99,15 @@ module RPS
     end
 
     def active_rounds?(game_id)
-      result = @db.exec(%q[
-        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}'
-        ])
-
+      result = @db.exec_params(%q[
+        SELECT round_winner FROM rounds WHERE game_id = ($1);
+        ], [game_over])
     end
 
     def get_all_rounds_for_game_id(game_id)
-        result = @db.exec(%q[
-        SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
-        ])
+        result = @db.exec_params(%q[
+        SELECT round_id FROM rounds WHERE game_id = ($1);
+        ], [game_id])
         return result
     end
 
