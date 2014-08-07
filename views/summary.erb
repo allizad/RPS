@@ -1,11 +1,11 @@
 
 
 <div align="center">
-  <h2>Welcome! </h2>
+  <h2>Welcome <%= @user.username %>! </h2>
 </div>
 
-<form action="/start-game" method="get">
-	<button class="button" id="start_game">Start Game</button>
+<form action="/new-game" method="get">
+	<button class="button" id="new_game">Start New Game</button>
 </form>
 
 <!-- div showing games in progress that are your turn -->

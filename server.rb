@@ -16,6 +16,7 @@ get '/' do
 end
 
 get '/summary' do
+  @user = RPS.dbi.get_user_by_username(session['RPS_session'])
   erb :summary
 end
 
@@ -33,7 +34,7 @@ post '/signin' do
 end
 
 #Register to play - goes straight to summary page
-post '/registration' do
+post '/register' do
   register = RPS::Register.run(params)
 
   if register[:success?]
@@ -45,9 +46,9 @@ post '/registration' do
   end
 end
 
-get '/start-game' do
+get '/new-game' do
   # choose an opponent
-  erb :start_game
+  erb :new_game
 end
 
 get '/game' do
