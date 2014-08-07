@@ -8,3 +8,8 @@
 <form action="/game" method="post">
 	<button class="button" id="opponent">Opponent</button>
 </form>
+
+<% @opponents.each do |x| %>
+	<p><%=x['username']%></p>
+	<%end%>
+

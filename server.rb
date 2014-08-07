@@ -47,12 +47,17 @@ post '/register' do
 end
 
 get '/new-game' do
+  @opponents = RPS.dbi.opponent_list(session['RPS_session'])
   # choose an opponent
   erb :new_game
 end
 
 get '/game' do
   erb :game
+end
+
+post '/move/rock' do
+
 end
 
 # from start game, you create a new game

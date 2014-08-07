@@ -70,6 +70,13 @@ module RPS
       RPS::User.new(data['username'], data['password_digest'])
     end
 
+    def opponent_list(session_username)
+      result = @db.exec_params(%Q[
+        SELECT username FROM users WHERE username != $1;
+      ],[session_username])
+      return result
+    end
+
     def start_game(player1, player2)
       @db.exec_params(%q[
       INSERT INTO games (player1, player2)
@@ -89,6 +96,10 @@ module RPS
         INSERT INTO rounds (game_id, p2_move)
         VALUES ($1, $2);
         ], [game_id, p2_move])  
+    end
+
+    def play_move(move)
+      
     end
 
     def game_over?(game_id, player1, player2)

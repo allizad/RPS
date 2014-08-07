@@ -2,7 +2,7 @@ module RPS
 
   class PlayMove
 
-    def self.run(params)
+    def self.run(move)
       
     end
 
