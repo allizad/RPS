@@ -2,6 +2,8 @@ require 'sinatra'
 require 'rack-flash'
 require_relative 'lib/RPS.rb'
 
+require 'pry-byebug'
+
 set :sessions, true
 use Rack::Flash
 set :bind, '0.0.0.0'
@@ -56,10 +58,11 @@ end
 # from new game, you create a game with opponent
 post '/game/:username' do
   # @opponent_username = params[:username]
-  game_object = RPS::Game.new(session['RPS_session'], params[:username])
-  game = RPS.dbi.start_game(session['RPS_session'], params[:username])
+  # game_object = RPS::Game.new(session['RPS_session'], params[:username])
+  game_object = RPS.dbi.start_game(session['RPS_session'], params[:username])
+  # binding.pry
 
-  redirect to "/game/#{params[:username]}/#{game}"
+  redirect to "/game/#{params[:username]}/#{game_object.game_id}"
 end
 
 # get '/game/:username/:game_id' do
@@ -79,17 +82,21 @@ get '/game/:username/:game_id' do
 
   if !@active_round
     @active_round = RPS.dbi.start_round(params[:game_id].to_i)
-  
+  else 
+    @active_round
   end
 
   erb :game
 end
 
+#find games where my name is player2
+
 post '/game/:username/:game_id/:round_id/:move' do
   # @move = params[:move]
-
+#if im player one:
   RPS.dbi.player1_move(params[:round_id], params[:move])
-
+#else:
+#player_2 move
 
   # create values for opponent username, game id, round id 
   # start a new round

@@ -1,21 +1,23 @@
 module RPS
   class Game
 
-    attr_reader :player1, :player2
+    attr_reader :game_id, :player1, :player2, :game_winner
     
     # game is initalized with two players
-    def initialize(player1, player2)
-      @player1 = player1
-      @player2 = player2
+    def initialize(data = {})
+      @game_id = data['game_id']
+      @player1 = data['player1']
+      @player2 = data['player2']
+      @game_winner = data['game_winner']
     end
 
-    def game_over?
+    # def game_over?
       
-    end
+    # end
 
-    def game_winner
+    # def game_winner
       
-    end
+    # end
   end
 
   class Round
@@ -34,19 +36,19 @@ module RPS
       @p1_move == nil || @p2_move == nil
     end
 
-    def round_over?
-      if @p1_move == nil || @p2_move == nil
-        false
-      else
-        true
-      end
-    end
+    # def round_over?
+    #   if @p1_move == nil || @p2_move == nil
+    #     false
+    #   else
+    #     true
+    #   end
+    # end
 
     def winner
-      if !round_over?
+      if active?
         return nil
       elsif @p1_move == @p2_move
-        return 'tie'
+        return "tie"
       elsif @p1_move == "rock"
         if @p2_move == "paper"
           return "player2"
@@ -67,6 +69,7 @@ module RPS
         end
       end
     end
+
 
   end
 end
