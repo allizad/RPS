@@ -4,6 +4,7 @@ $light-gray: #B5B5B5;
 $dark-gray: #5C554F;
 $gold: #CCA347;
 $gold-dark: #7F662C;
+$very-dark-gold: #261F0F;
 
 body {
 	display: block;
@@ -186,18 +187,20 @@ div.opp-game {
 	}
 }
 // ____________________________________________________________________
-// GAME PAGE STYLING
+// Summary PAGE STYLING
 // ____________________________________________________________________
 div.welcome-hero.hero {
-	padding: 6rem 1.62rem;
+	padding: 5rem 1.62rem 3rem 1.62rem;
 	h1 {
 		font-family: 'Josefin Sans', sans-serif;
 		font-weight: 700;
 		font-size: 5rem;
 		letter-spacing: 0.5rem;
+		color: $very-dark-gold;
 	}
 }
 div.new-game {
+	padding-bottom: 4rem;
 	input.button.radius.large-6.medium-6.small-6.columns {
 		padding: 1rem;
 	}
@@ -212,9 +215,48 @@ div.new-game {
 		background-color: $gold-dark;
 	}
 }
+div.row.summary {
+	h3, h4 {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		// color: white;
+	}
+	h3 {
+		font-variant: small-caps;
+		font-size: 2.3rem;
+		padding: 1.5rem 0;
+		color: $very-dark-gold;
+	}
+}
+div.overview, div.past-games{
+	background-color: $gold;
+}
+div.row.welcome-span {
+	background-image:url('../../img/rps_ready_front.png');
+	background-repeat: no-repeat;
+	background-position: 45% -10%;
+	// background-height: 10px;
+	background-size: 40%;
+}
+// ____________________________________________________________________
+// Welcome PAGE STYLING
+// ____________________________________________________________________
+div.row.new-game-hero{
+		padding: 4rem 1.62rem 5rem 1.62rem;
+	h1 {
+		font-family: 'Josefin Sans', sans-serif;
+		font-weight: 700;
+		font-size: 5rem;
+		letter-spacing: 0.5rem;
+	}
+	background-image:url('../../img/rps_ready_hero.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: 50% 30%;
+}
+a.button.new-game-buttons {
 
-
-
+}
 
 
 

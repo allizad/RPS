@@ -18,8 +18,9 @@
 			<div><input class="button" type='submit' value='Scissors'/></div>
 		</form> -->
 	<% moves_array = ["rock", "paper", "scissors"] %>
+	<% @params %>
 	<% moves_array.each do |m| %>
-		<a class="button" href="/#{@rounds_so_far_info[:username]}/:game_id/:round_id/<%= m %>"><%=m%></a>
+		<a class="button" href="/game/<%= @params[:username] %>/<%= @params[:game_id] %>/<%= @param[:round_id] %>/<%= m %>"><%= m %></a>
 	<%end%>
 
 </div> <!-- END of USER div -->
@@ -27,43 +28,17 @@
 	<h3>Rounds</h3>
 	<table>
 		<thead>
-			<th>Round</th>
-			<th>Your Move</th>
-			<th>Opponent Move</th>
-			<th>Winner</th>
+			<th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
 		</thead>
 		<tbody>
-			<tr>
-			<!-- these data spots will be embedded with ruby -->
-				<td class="round-number">1</td>
-				<td>paper</td>
-				<td>rock</td>
-				<td>you!</td>
-			</tr>			
-			<tr>
-				<td class="round-number">2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">3</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">4</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">5</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
+		<% rounds_counter = 1 %>
+		<% @game_rounds.each do |hash| %>
+		<td><%= rounds_counter %></td>
+		<td><%= hash['p1_move'] %></td>
+		<td><%= hash['p2_move'] %></td>
+		<td><%= hash['round_winner'] %></td>
+		<% rounds_counter += 1 %>
+		<% end %>
 		</tbody>
 	</table>
 

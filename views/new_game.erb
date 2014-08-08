@@ -1,16 +1,18 @@
 
-<div align="center">
-  <h2>Choose an opponent</h2>
+<div class="row new-game">
+	
+	<div class="row new-game-hero">
+		<h1>choose an opponent</h1>
+	</div>
+
+	<div class="row opponent-buttons">
+		<div class="large-3 medium-3 columns"><br></div>
+		<div class="opponent-buttons large-6 columns">
+			<% @opponents.each do |x| %>
+				<a class="button new-game-buttons" href="/game/<%= x['username'] %>"><%=x['username']%></a>
+			<%end%>
+		</div>
+	
+		<div class="large-3 medium-3 columns"><br></div>
+	</div>
 </div>
-
-<!-- prints out usernames of people in the database (can click on them?)-->
-
-<!-- <form action="/game" method="post">
-	<button class="button" id="opponent" value="chrisoen">chrisoen</button>
-</form>
-
-<a class="button" href="/game/<%= @username %>"></a> -->
-
-<% @opponents.each do |x| %>
-<a class="button" href="/game/<%= x['username'] %>"><%=x['username']%></a>
-	<%end%>
