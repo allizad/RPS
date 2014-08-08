@@ -147,6 +147,14 @@ div.new-game {
   div.new-game button, div.new-game .button:hover {
     background-color: #7f662c; }
 
+div.row.gold-background {
+  border-top: 0.3rem solid #b5b5b5;
+  border-bottom: 0.3rem solid #b5b5b5;
+  background-color: #cca347; }
+
+div.your-move, div.opp-move {
+  background-color: white; }
+
 div.row.summary h3, div.row.summary h4 {
   font-family: 'Raleway', sans-serif;
   letter-spacing: 0.1rem; }
@@ -156,13 +164,11 @@ div.row.summary h3 {
   padding: 1.5rem 0;
   color: #261f0f; }
 
-div.overview, div.past-games {
-  background-color: #cca347; }
-
 div.row.welcome-span {
   background-image: url("../../img/rps_ready_front.png");
   background-repeat: no-repeat;
-  background-position: 45% -10%;
+  background-position: 45% -10vh;
+  background-height: 40vh;
   background-size: 40%; }
 
 div.row.new-game-hero {
@@ -176,3 +182,6 @@ div.row.new-game-hero {
     font-weight: 700;
     font-size: 5rem;
     letter-spacing: 0.5rem; }
+
+div.new-game button {
+  display: inline-block; }

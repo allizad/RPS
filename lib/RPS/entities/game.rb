@@ -4,7 +4,7 @@ module RPS
     attr_reader :player1, :player2
     
     # game is initalized with two players
-    def initialize(player1, player2)
+    def initialize(data={})
       @player1 = player1
       @player2 = player2
     end

@@ -76,38 +76,56 @@ module RPS
       ],[session_username])
       return result
     end
-
+ 
+    #### GAMES ####
+ 
     def build_game(data)
-      RPS::Game.new(data['player1'], data['player2'])
+      RPS::Game.new(data)
     end
-
+ 
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
       VALUES ($1, $2)
-      RETURNING game_id;
+      RETURNING *;
       ], [player1_username, player2_username])
  
-      result.first['game_id']
+      # return result.first
+      build_game(result.first)
     end
  
-    def has_rounds?(game_id)
-      result = @db.exec(%q[
-        SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
-        ])
-      if result.first == nil
-        return false
-      else
+    def game_over?(game_id, player1, player2)
+      result = @db.exec(%Q[
+        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}';
+      ])
+ 
+      if result.count(player1.user_id) > 2
+        return true
+      elsif result.count(player2.user_id) > 2
         return true
       end
     end
-
-    def get_active_round(game_id)
-      result = @db.exec(%q[
-        SELECT round_winner FROM rounds WHERE game_id = #{game_id};
-        ])
-    end
-
+ 
+ 
+    #### ROUNDS ####
+ 
+    # def has_rounds?(game_id)
+    #   result = @db.exec(%q[
+    #     SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
+    #     ])
+    #   if result.first == nil
+    #     return false
+    #   else
+    #     return true
+    #   end
+    # end
+ 
+    # def get_active_round(game_id)
+    #   result = @db.exec(%q[
+    #     SELECT round_winner FROM rounds WHERE game_id = #{game_id};
+    #     ])
+    # end
+ 
     def build_round(data)
       RPS::Round.new(data)
     end
@@ -116,7 +134,7 @@ module RPS
         result = @db.exec_params(%q[
         SELECT * FROM rounds WHERE game_id = $1;
         ], [game_id])
-
+ 
         result.map {|row| build_round(row)}
     end
  
@@ -126,9 +144,10 @@ module RPS
         VALUES ($1)
         RETURNING *;
         ], [game_id])
+ 
       build_round(result.first)
     end
-
+ 
     def player1_move(round_id, move)
       @db.exec_params(%q[
         UPDATE rounds
@@ -151,18 +170,9 @@ module RPS
       #return true if nothing in player 1 spot
     end
  
-    def game_over?(game_id, player1, player2)
-      result = @db.exec(%Q[
-        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}';
-      ])
- 
-      if result.count(player1.user_id) > 2
-        return true
-      elsif result.count(player2.user_id) > 2
-        return true
-      end
-    end
   end
+ 
+ 
 # singleton creation
   def self.dbi
     @__db_instance ||= DBI.new

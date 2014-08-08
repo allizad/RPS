@@ -215,6 +215,14 @@ div.new-game {
 		background-color: $gold-dark;
 	}
 }
+div.row.gold-background{
+	border-top: 0.3rem solid $light-gray;
+	border-bottom: 0.3rem solid $light-gray;
+	background-color: $gold;
+}
+div.your-move, div.opp-move {
+	background-color: white;
+}
 div.row.summary {
 	h3, h4 {
 		font-family: 'Raleway', sans-serif;
@@ -228,18 +236,17 @@ div.row.summary {
 		color: $very-dark-gold;
 	}
 }
-div.overview, div.past-games{
-	background-color: $gold;
-}
 div.row.welcome-span {
 	background-image:url('../../img/rps_ready_front.png');
 	background-repeat: no-repeat;
-	background-position: 45% -10%;
+	background-position: 45% -10vh;
+	background-height: 40vh;
 	// background-height: 10px;
 	background-size: 40%;
 }
+
 // ____________________________________________________________________
-// Welcome PAGE STYLING
+// New_Game.erb PAGE STYLING
 // ____________________________________________________________________
 div.row.new-game-hero{
 		padding: 4rem 1.62rem 5rem 1.62rem;
@@ -254,8 +261,10 @@ div.row.new-game-hero{
 	background-size: 100%;
 	background-position: 50% 30%;
 }
-a.button.new-game-buttons {
-
+div.new-game {
+	button {
+		display: inline-block;
+	}
 }
 
 
