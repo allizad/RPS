@@ -75,6 +75,8 @@ get '/game/:username/:game_id' do
 
   @active_round = @game_rounds.find {|r| r.active?}
 
+  @game_rounds.delete(@active_round)
+
   if !@active_round
     @active_round = RPS.dbi.start_round(params[:game_id].to_i)
   
@@ -83,7 +85,7 @@ get '/game/:username/:game_id' do
   erb :game
 end
 
-get '/game/:username/:game_id/:round_id/:move' do
+post '/game/:username/:game_id/:round_id/:move' do
   # @move = params[:move]
 
   RPS.dbi.player1_move(params[:round_id], params[:move])
@@ -92,7 +94,7 @@ get '/game/:username/:game_id/:round_id/:move' do
   # create values for opponent username, game id, round id 
   # start a new round
 
-  redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{params[:round_id]}"
+  redirect to "/game/#{params[:username]}/#{params[:game_id]}"
 end
 
 get '/game' do
