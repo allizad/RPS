@@ -30,6 +30,10 @@ module RPS
       # return winner
     end
 
+    def active?
+      @p1_move == nil || @p2_move == nil
+    end
+
     def round_over?
       if @p1_move == nil || @p2_move == nil
         false

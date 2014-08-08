@@ -2,8 +2,8 @@
 <div class="row game-page">
 	
 	<div class="row hero"> <!-- game header title -->
-		<div><%= @game_rounds.first %></div>
 		<h1>SHOOT!</h1>
+		<pre><%=@active_round.inspect%></pre>
 	</div> <!-- END game header title -->
 <div class="row game-div" data-equalizer> <!-- game stuff -->
 
@@ -20,9 +20,10 @@
 		</form> -->
 
     <% moves_array = ["rock", "paper", "scissors"] %>
-    <% @params %>
-    <% moves_array.each do |m| %>
-        <a class="button" href="/game/<%= @params[:username] %>/<%= @params[:game_id] %>/<%= @params[:round_id] %>/<%= m %>"><%=m%></a>
+	<% moves_array.each do |m| %>
+    <form action="/game/<%= @params[:username]%>/<%= @params[:game_id]%>/<%= @active_round.round_id%>/<%=m%>" method="post">
+    	<button class="button"><%=m%></button>
+    </form>
     <%end%>
 
 </div> <!-- END of USER div -->

@@ -73,12 +73,12 @@ get '/game/:username/:game_id' do
   
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
 
-  if @game_rounds.empty?
-    round = RPS.dbi.start_round(params[:game_id].to_i)
+  @active_round = @game_rounds.find {|r| r.active?}
+
+  if !@active_round
+    @active_round = RPS.dbi.start_round(params[:game_id].to_i)
+  
   end
-  @params = params
-
-
 
   erb :game
 end
