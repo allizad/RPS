@@ -12,5 +12,7 @@
 <a class="button" href="/game/<%= @username %>"></a> -->
 
 <% @opponents.each do |x| %>
-<a class="button" href="/game/<%= x['username'] %>"><%=x['username']%></a>
-	<%end%>
+<form action="/game/<%= x['username'] %>" method="post">
+	<button class="button"><%=x['username']%></button>
+</form>
+<%end%>

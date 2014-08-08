@@ -18,11 +18,13 @@
 		<form method="post" action="/move/scissors">
 			<div><input class="button" type='submit' value='Scissors'/></div>
 		</form> -->
-		<% @rounds_so_far_info %>
-	<% moves_array = ["rock", "paper", "scissors"] %>
-	<% moves_array.each do |m| %>
-		<a class="button" href="/#{@rounds_so_far_info[:username]}/:game_id/:round_id/<%= m %>"><%=m%></a>
-	<%end%>
+
+    <% moves_array = ["rock", "paper", "scissors"] %>
+    <% @params %>
+    <% moves_array.each do |m| %>
+        <a class="button" href="/game/<%= @params[:username] %>/<%= @params[:game_id] %>/<%= @params[:round_id] %>/<%= m %>"><%=m%></a>
+    <%end%>
+
 
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->

@@ -77,6 +77,10 @@ module RPS
       return result
     end
 
+    def build_game(data)
+      RPS::Game.new(data['player1'], data['player2'])
+    end
+
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
@@ -122,17 +126,18 @@ module RPS
       result.first['round_id']
     end
 
-    def player1_move(round_id, game_id, move)
+    def player1_move(round_id, move)
       @db.exec_params(%q[
-        INSERT INTO rounds (round_id, game_id, p1_move)
-        VALUES ($1, $2, $3);
-        ], [round_id, game_id, move])
+        UPDATE rounds
+        SET p1_move = $2
+        WHERE round_id = $1;
+        ], [round_id, move])
     end
 
     def player2_move(round_id, game_id, move)
       @db.exec_params(%q[
-        INSERT INTO rounds (round_id, game_id, p2_move)
-        VALUES ($1, $2, $4);
+        INSERT INTO rounds (round_id, game_id, move)
+        VALUES ($1, $2, $3);
         ], [round_id, game_id, move])
     end 
 
