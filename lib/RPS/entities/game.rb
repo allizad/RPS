@@ -22,15 +22,16 @@ module RPS
 
   class Round
 
-    attr_reader :round_id, :game_id, :p1_move, :p2_move, :round_winner
+    attr_reader :round_id, :player1, :player2, :game_id, :p1_move, :p2_move, :round_winner
 
     def initialize(data = {})
       @round_id = data['round_id']
       @game_id = data['game_id']
+      @player1 = data['player1']
+      @player2 = data['player2']
       @p1_move = data['p1_move']
       @p2_move = data['p2_move']
       @round_winner = data['round_winner']
-      # return winner
     end
 
     def active?
@@ -45,27 +46,25 @@ module RPS
     #   end
     # end
 
-    def winner
-      if active?
-        return nil
-      elsif @p1_move == @p2_move
+    def winner(p1_move, p2_move)
+      if p1_move == p2_move
         return "tie"
-      elsif @p1_move == "rock"
-        if @p2_move == "paper"
+      elsif p1_move == "rock"
+        if p2_move == "paper"
           return "player2"
-        elsif @p2_move == "scissors"
+        elsif p2_move == "scissors"
           return "player1"
         end
-      elsif @p1_move == "paper"
-        if @p2_move == "rock"
+      elsif p1_move == "paper"
+        if p2_move == "rock"
           return "player1"
-        elsif @p2_move == "scissors"
+        elsif p2_move == "scissors"
           return "player1"
         end
-      elsif @p1_move == "scissors"
-        if @p2_move == "paper"
+      elsif p1_move == "scissors"
+        if p2_move == "paper"
           return "player1"
-        elsif @p2_move == "rock"
+        elsif p2_move == "rock"
           return "player2"
         end
       end

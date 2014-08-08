@@ -27,6 +27,8 @@ module RPS
         CREATE TABLE IF NOT EXISTS rounds(
           round_id serial NOT NULL PRIMARY KEY,
           game_id integer,
+          player1 text,
+          player2 text,
           p1_move text,
           p2_move text,
           round_winner text
@@ -93,12 +95,40 @@ module RPS
       # return result.first
       build_game(result.first)
     end
+
+    def get_active_games_for_username(username)
+      result = @db.exec_params(%q[
+        SELECT * FROM games WHERE player1 = $1 OR player2 = $1 AND game_winner IS NULL;
+        ], [username])
+
+      result.map {|row| build_game(row) }
+    end
+
+    def get_past_games_for_username(username)
+      result = @db.exec_params(%q[
+        SELECT * FROM games WHERE game_winner IS NOT NULL;
+        ])
+    end
+
+    def get_player1_name(game_id)
+      result = @db.exec_params(%q[
+        SELECT player1 FROM games WHERE game_id = $1;
+        ], [game_id])
+      result.first
+    end
  
+    def get_player2_name(game_id)
+      result = @db.exec_params(%q[
+        SELECT player2 FROM games WHERE game_id = $1;
+        ], [game_id])
+      result.first
+    end
+
 
     def game_over?(game_id, player1, player2)
       result = @db.exec(%Q[
-        SELECT round_winner FROM rounds WHERE game_id = '#{game_id}';
-      ])
+        SELECT round_winner FROM rounds WHERE game_id = $1;
+      ], [game_id])
 
       if result.count(player1.user_id) > 2
         return true
@@ -139,12 +169,12 @@ module RPS
         result.map {|row| build_round(row)}
     end
  
-    def start_round(game_id)
+    def start_round(game_id, player1, player2)
       result = @db.exec_params(%q[
-        INSERT INTO rounds (game_id)
-        VALUES ($1)
+        INSERT INTO rounds (game_id, player1, player2)
+        VALUES ($1, $2, $3)
         RETURNING *;
-        ], [game_id])
+        ], [game_id, player1, player2])
  
       build_round(result.first)
     end
@@ -157,18 +187,44 @@ module RPS
         ], [round_id, move])
     end
  
-    def player2_move(round_id, game_id, move)
+    def player2_move(round_id, move)
       @db.exec_params(%q[
-        INSERT INTO rounds (round_id, game_id, move)
-        VALUES ($1, $2, $3);
-        ], [round_id, game_id, move])
+        UPDATE rounds
+        SET p2_move = $2
+        WHERE round_id = $1;
+        ], [round_id, move])
     end 
  
-    def player_1?()
-      @db.exec_params(%q[
-        SELECT player1 FROM rounds WHERE game_id = 
-        ])
-      #return true if nothing in player 1 spot
+    def player_1?(username, game_id)
+      result = @db.exec_params(%q[
+        SELECT player1 FROM games WHERE game_id = $1;
+        ], [game_id])
+      if result.first['player1'] == username
+        return true
+      else
+        return false
+      end
+    end
+
+    def my_turn_rounds(username)
+      result = @db.exec_params(%q[
+        SELECT * FROM rounds
+        WHERE player1 = $1 AND p1_move IS NULL
+        OR player2 = $1 AND p2_move IS NULL;
+        ], [username])
+
+      result.map {|row| build_round(row)}
+    end
+
+    def opponent_name(username, game_id)
+      result = @db.exec_params(%q[
+        SELECT * FROM games WHERE game_id = $1;
+        ], [game_id])
+      if result.first['player1'] == username
+        return result.first['player2']
+      else
+        return result.first['player1']
+      end
     end
 
 

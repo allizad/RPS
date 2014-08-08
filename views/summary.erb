@@ -11,6 +11,18 @@
 </div> <!-- END of new game button directing to list of users -->
 </div>
 
+<!-- chris test -->
+<div class="opponent-buttons large-6 columns">
+	<% @my_turn_data.each do |x| %>
+		<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>" method="get">
+			<button class="button"> <%= x[:opponent]%> </button>
+		</form>
+	<%end%>
+</div>
+<!-- chris test -->
+
+
+
 <!-- div showing games in progress that are your turn -->
 <div class="row gold-background">
 	<div class="row overview">
