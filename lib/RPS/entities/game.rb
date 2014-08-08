@@ -21,6 +21,7 @@ module RPS
   end
 
   class Round
+
     attr_reader :round_id, :game_id, :p1_move, :p2_move, :round_winner
 
     def initialize(data = {})

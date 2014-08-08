@@ -1,5 +1,5 @@
-
-
+<div class="summary row">
+<div class="row welcome-span">
 <div class="row welcome-hero hero">
   <h1>Welcome, <%= @user.username %>! </h1>
 </div>
@@ -9,20 +9,26 @@
 	<button class="button" id="new_game">Start New Game</button>
 </form>
 </div> <!-- END of new game button directing to list of users -->
-
-<!-- div showing games in progress that are your turn -->
-
-<div class="row">
-	
 </div>
 
-<!-- div showing games in progress that are opponents turn -->
-<div class="row">
+<!-- div showing games in progress that are your turn -->
+<div class="row gold-background">
+	<div class="row overview">
+		<h3>current games</h3>
+	</div>
 	
+	<div class="large-6 medium-6 columns your-move">
+		<h4>throw your move</h4>
+	</div>
+	<!-- div showing games in progress that are opponents turn -->
+	<div class="large-6 medium-6 columns opp-move">
+		<h4>waiting for opponent</h4>
+	</div>
 </div>
 
 <!-- div showing past games -->
-<div class="row">
-	
+<div class="row past-games grey-div">
+	<h3>past games</h3>
 </div>
 
+</div>

@@ -1,13 +1,13 @@
 require 'pg'
 require 'pry-byebug'
-
+ 
 module RPS
   class DBI
     def initialize
       @db = PG.connect(host: 'localhost', dbname: 'RPS')
       build_tables
     end
-
+ 
     def build_tables
       @db.exec(%q[
         CREATE TABLE IF NOT EXISTS users(
@@ -32,44 +32,44 @@ module RPS
           round_winner text
           )])
     end
-
+ 
     def register_user(user)
         @db.exec_params(%q[
         INSERT INTO users (username, password_digest)
         VALUES ($1, $2);
         ], [user.username, user.password_digest])
     end
-
+ 
     def get_user_by_username(username)
       result = @db.exec(%Q[
         SELECT * FROM users WHERE username = '#{username}';
       ])
-
+ 
       user_data = result.first
-
+ 
       if user_data
         build_user(user_data)
       else
         nil
       end
     end
-
+ 
     def username_exists?(username)
       result = @db.exec(%Q[
         SELECT * FROM users WHERE username = '#{username}';
       ])
-
+ 
       if result.count > 0
         true
       else
         false
       end
     end
-
+ 
     def build_user(data)
       RPS::User.new(data['username'], data['password_digest'])
     end
-
+ 
     def opponent_list(session_username)
       result = @db.exec_params(%Q[
         SELECT username FROM users WHERE username != $1;
@@ -82,17 +82,18 @@ module RPS
     def build_game(data)
       RPS::Game.new(data)
     end
-
+ 
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
       VALUES ($1, $2)
       RETURNING *;
       ], [player1_username, player2_username])
-
+ 
       # return result.first
       build_game(result.first)
     end
+ 
 
     def game_over?(game_id, player1, player2)
       result = @db.exec(%Q[
@@ -129,25 +130,25 @@ module RPS
     def build_round(data)
       RPS::Round.new(data)
     end
-
+ 
     def get_all_rounds_for_game_id(game_id)
         result = @db.exec_params(%q[
         SELECT * FROM rounds WHERE game_id = $1;
         ], [game_id])
-
+ 
         result.map {|row| build_round(row)}
     end
-
+ 
     def start_round(game_id)
       result = @db.exec_params(%q[
         INSERT INTO rounds (game_id)
         VALUES ($1)
         RETURNING *;
         ], [game_id])
-
+ 
       build_round(result.first)
     end
-
+ 
     def player1_move(round_id, move)
       @db.exec_params(%q[
         UPDATE rounds
@@ -155,20 +156,21 @@ module RPS
         WHERE round_id = $1;
         ], [round_id, move])
     end
-
+ 
     def player2_move(round_id, game_id, move)
       @db.exec_params(%q[
         INSERT INTO rounds (round_id, game_id, move)
         VALUES ($1, $2, $3);
         ], [round_id, game_id, move])
     end 
-
+ 
     def player_1?()
       @db.exec_params(%q[
         SELECT player1 FROM rounds WHERE game_id = 
         ])
       #return true if nothing in player 1 spot
     end
+
 
   end
 
@@ -178,6 +180,3 @@ module RPS
     @__db_instance ||= DBI.new
   end
 end
-
-
-
