@@ -54,33 +54,48 @@ get '/new-game' do
 end
  
 # from new game, you create a game with opponent
-get '/game/:username' do
+post '/game/:username' do
   # @opponent_username = params[:username]
+  game_object = RPS::Game.new(session['RPS_session'], params[:username])
   game = RPS.dbi.start_game(session['RPS_session'], params[:username])
  
   redirect to "/game/#{params[:username]}/#{game}"
 end
- 
+
+# get '/game/:username/:game_id' do
+#   # method that automatically check the dbi to update any info => return a @variable 
+#   round = RPS.dbi.start_round(params[:game_id].to_i)
+
+#   redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{round}"
+# end
+
 get '/game/:username/:game_id' do
-  # method that automatically check the dbi to update any info => return a @variable 
-  round = RPS.dbi.start_round(params[:game_id].to_i)
- 
-  redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{round}"
-end
- 
-get '/game/:username/:game_id/:round_id' do
+  
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
- 
+
+  @active_round = @game_rounds.find {|r| r.active?}
+
+  @game_rounds.delete(@active_round)
+
+  if !@active_round
+    @active_round = RPS.dbi.start_round(params[:game_id].to_i)
+  
+  end
+
   erb :game
 end
- 
-get '/move/:move' do
-  @move = params[:move]
- 
+
+post '/game/:username/:game_id/:round_id/:move' do
+  # @move = params[:move]
+
+  RPS.dbi.player1_move(params[:round_id], params[:move])
+
+
   # create values for opponent username, game id, round id 
   # start a new round
- 
-  redirect to '/game'
+
+  redirect to "/game/#{params[:username]}/#{params[:game_id]}"
+
 end
  
 get '/game' do

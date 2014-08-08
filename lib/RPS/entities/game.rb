@@ -1,4 +1,4 @@
- module RPS
+module RPS
   class Game
 
     attr_reader :player1, :player2
@@ -20,12 +20,19 @@
 
   class Round
 
-    attr_reader :p1_move, :p1_move, :round_winner
+    attr_reader :round_id, :game_id, :p1_move, :p2_move, :round_winner
 
-    def initialize(p1_move, p2_move)
-      @p1_move = p1_move
-      @p2_move = p2_move
+    def initialize(data = {})
+      @round_id = data['round_id']
+      @game_id = data['game_id']
+      @p1_move = data['p1_move']
+      @p2_move = data['p2_move']
+      @round_winner = data['round_winner']
       # return winner
+    end
+
+    def active?
+      @p1_move == nil || @p2_move == nil
     end
 
     def round_over?

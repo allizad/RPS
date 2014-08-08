@@ -17,30 +17,35 @@
 		<form method="post" action="/move/scissors">
 			<div><input class="button" type='submit' value='Scissors'/></div>
 		</form> -->
-	<% moves_array = ["rock", "paper", "scissors"] %>
-	<% @params %>
+
+    <% moves_array = ["rock", "paper", "scissors"] %>
 	<% moves_array.each do |m| %>
-		<a class="button" href="/game/<%= @params[:username] %>/<%= @params[:game_id] %>/<%= @param[:round_id] %>/<%= m %>"><%= m %></a>
-	<%end%>
+    <form action="/game/<%= @params[:username]%>/<%= @params[:game_id]%>/<%= @active_round.round_id%>/<%=m%>" method="post">
+    	<button class="button"><%=m%></button>
+    </form>
+    <%end%>
+
 
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
 	<h3>Rounds</h3>
-	<table>
-		<thead>
-			<th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
-		</thead>
-		<tbody>
-		<% rounds_counter = 1 %>
-		<% @game_rounds.each do |hash| %>
-		<td><%= rounds_counter %></td>
-		<td><%= hash['p1_move'] %></td>
-		<td><%= hash['p2_move'] %></td>
-		<td><%= hash['round_winner'] %></td>
-		<% rounds_counter += 1 %>
-		<% end %>
-		</tbody>
-	</table>
+
+    <table>
+        <thead>
+            <th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
+        </thead>
+        <tbody>
+        <% rounds_counter = 1 %>
+        <% @game_rounds.each do |round| %>
+        <td><%= rounds_counter %></td>
+        <td><%= round.p1_move %></td>
+        <td><%= round.p2_move %></td>
+        <td><%= round.round_winner %></td>
+        <% rounds_counter += 1 %>
+        <% end %>
+        </tbody>
+    </table>
+
 
 </div> <!-- END OF game history div -->
 

@@ -76,7 +76,11 @@ module RPS
       ],[session_username])
       return result
     end
- 
+
+    def build_game(data)
+      RPS::Game.new(data['player1'], data['player2'])
+    end
+
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
       INSERT INTO games (player1, player2)
@@ -97,42 +101,46 @@ module RPS
         return true
       end
     end
- 
-    def active_rounds?(game_id)
+
+    def get_active_round(game_id)
       result = @db.exec(%q[
         SELECT round_winner FROM rounds WHERE game_id = #{game_id};
         ])
- 
+    end
+
+    def build_round(data)
+      RPS::Round.new(data)
     end
  
     def get_all_rounds_for_game_id(game_id)
         result = @db.exec_params(%q[
         SELECT * FROM rounds WHERE game_id = $1;
         ], [game_id])
-        return result
+
+        result.map {|row| build_round(row)}
     end
  
     def start_round(game_id)
       result = @db.exec_params(%q[
         INSERT INTO rounds (game_id)
         VALUES ($1)
-        RETURNING round_id;
+        RETURNING *;
         ], [game_id])
- 
-      result.first['round_id']
+      build_round(result.first)
     end
- 
-    def player1_move(round_id, game_id, move)
+
+    def player1_move(round_id, move)
       @db.exec_params(%q[
-        INSERT INTO rounds (round_id, game_id, p1_move)
-        VALUES ($1, $2, $3);
-        ], [round_id, game_id, move])
+        UPDATE rounds
+        SET p1_move = $2
+        WHERE round_id = $1;
+        ], [round_id, move])
     end
  
     def player2_move(round_id, game_id, move)
       @db.exec_params(%q[
-        INSERT INTO rounds (round_id, game_id, p2_move)
-        VALUES ($1, $2, $4);
+        INSERT INTO rounds (round_id, game_id, move)
+        VALUES ($1, $2, $3);
         ], [round_id, game_id, move])
     end 
  
