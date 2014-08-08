@@ -12,23 +12,68 @@
 </div>
 
 <!-- div showing games in progress that are your turn -->
-<div class="row gold-background">
+<div class="row gold-background" data-equalizer>
 	<div class="row overview">
 		<h3>current games</h3>
 	</div>
 	
-	<div class="large-6 medium-6 columns your-move">
+	<div class="large-5 medium-5 columns your-move" data-equalizer-watch>
 		<h4>throw your move</h4>
+		<!-- active game buttons -->
+
+		<!-- form erb populated -->
+
+		<button class="button"> VS allizad</button>
 	</div>
+	<div class="large-1 medium-1 columns median" data-equalizer-watch><br></div>
 	<!-- div showing games in progress that are opponents turn -->
-	<div class="large-6 medium-6 columns opp-move">
+	<div class="large-5 medium-5 columns opp-move" data-equalizer-watch>
 		<h4>waiting for opponent</h4>
+		<!-- active game buttons - waiting for user -->
+		<!-- form populated erb -->
+		<form></form>
 	</div>
 </div>
 
 <!-- div showing past games -->
-<div class="row past-games grey-div">
-	<h3>past games</h3>
+<div class="row past-games">
+	<div class="row past-games-title">
+		<h3>past games</h3>
+	</div>
+
+	<div class="row" data-equalizer>
+		<div class="large-5 medium-5 columns wins" data-equalizer-watch>
+		<h4>wins</h4>
+		<div class="row table">
+		<div class="medium-3 large-3 columns"><br></div>
+		<table class="medium-6 large-6 columns">
+			<tr><td>chris</td><td>10</td></tr>
+			<tr><td>allizad</td><td>0</td></tr>
+			<tr><td>bob</td><td>0</td></tr>
+		</table>
+		<div class="medium-3 large-3 columns"><br></div>
+		</div>
+		</div>
+
+		<div class="large-1 medium-1 columns median" data-equalizer-watch><br></div>
+
+		<div class="large-5 medium-5 columns losses">
+		<h4>losses</h4>
+		<div class="row table">
+		<div class="medium-3 large-3 columns"><br></div>
+		<table class="medium-6 large-6 columns">
+			<tr><td>chris</td><td>10</td></tr>
+			<tr><td>allizad</td><td>0</td></tr>
+			<tr><td>bob</td><td>0</td></tr>
+		</table>
+		<div class="medium-3 large-3 columns"><br></div>
+		</div>
+
+		</div>
+	</div>
+</div>
+<div class="row sign-out">
+	<button class="button">Sign Out</button>
 </div>
 
 </div>

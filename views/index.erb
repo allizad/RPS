@@ -1,5 +1,13 @@
+<div class="index">
 <div class="row main-hero hero">
 	<h1>Rock Paper Scissors</h1>
+	<span class="flash-homepage">
+	   <% if flash[:alert1] %>
+   	<%= flash[:alert1] %>
+   	 <% elsif flash[:alert2] %>
+  	<%= flash[:alert2] %>
+ 		<% end %>
+	</span>
 </div>
 
 
@@ -22,9 +30,7 @@
 		<input class="button radius" type='submit' value='LOGIN'>
    	<!-- <div class="large-3 medium-3 small-3 columns"><br></div> -->
   </div> <!-- end of row for login button -->
-   <% if flash[:alert1] %>
-   <%= flash[:alert1] %>
- <% end %>
+
  </form>
 </div>
 
@@ -42,9 +48,7 @@
  	</div><!-- END of row for registration form -->
   <input class="button radius" type='submit' value='REGISTER'>
   </br>
-  <% if flash[:alert2] %>
-  <%= flash[:alert2] %>
- <% end %>
+
  </form>
 </div>
 
@@ -52,6 +56,7 @@
 
 <footer class="row"> <!-- START of footer -->
 <h3>Contact Us</h3>
-<a href="#">Chris Oen</a>
-<a href="#">Alli Z.</a>
+<a href="#">chris oen</a>
+<a href="#">alli z.</a>
 </footer> <!-- END of footer -->
+</div>

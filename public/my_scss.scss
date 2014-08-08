@@ -6,6 +6,18 @@ $gold: #CCA347;
 $gold-dark: #7F662C;
 $very-dark-gold: #261F0F;
 
+
+a {
+	transition: all .2s ease-in-out;
+	&:hover {
+	}
+}
+button {
+	transition: all .2s ease-in-out;
+	&:hover {
+	}
+}
+
 body {
 	display: block;
 	text-align: center;
@@ -15,10 +27,25 @@ body div.row {
 	margin: 0;
 	max-width: 100%;
 }
-div.main-hero {
+span.flash-homepage {
+	font-family: 'Josefin Sans', sans-serif;
+	font-weight: 700;
+	font-size: 2rem;
+	letter-spacing: 0.5rem;
+	color: rgba(203, 163, 71, 0.6);
+	width: 100%;
+	padding: 1rem;
+}
+div.index {
 	background-image:url('../../img/large_rps.png');
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: 100%;
+}
+div.main-hero {
+	// background-image:url('../../img/large_rps.png');
+	// background-repeat: no-repeat;
+	// background-size: 100%;
 	padding: 6rem 1.62rem;
 }
 div.hero  {
@@ -28,7 +55,7 @@ div.hero  {
 		font-size: 5rem;
 		letter-spacing: 0.5rem;
 	}
-	padding: 7rem 1.62rem;
+	padding: 3rem 1.62rem;
 }
 input.button.radius {
 	border-radius: 0.9rem;
@@ -42,6 +69,7 @@ div.row.sign-in {
 		letter-spacing: -0.01rem;
 	}
 	input {
+		background-color: transparent;
 		border: none;
 		box-shadow: none;
 		border-bottom: 1px solid $light-gray;
@@ -71,30 +99,38 @@ div.row.sign-in {
 	}
 }
 	// placeholder text styling
-// 	::-webkit-input-placeholder {
-// 		font-family: 'Raleway', sans-serif;
-// 		letter-spacing: 0.1rem;
-// 		text-align: center;
-// 	}
+	::-webkit-input-placeholder {
+		font-family: 'Josefin Sans', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		color: $gold;
+		font-size: 1.2rem;
+	}
 
-// 	:-moz-placeholder { /* Firefox 18- */
-// 		font-family: 'Raleway', sans-serif;
-// 		letter-spacing: 0.1rem;
-// 		text-align: center;
-// 	}
+	:-moz-placeholder { /* Firefox 18- */
+		font-family: 'Josefin Sans', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		color: $gold;
+		font-size: 1.2rem;
+	}
 
-// 	::-moz-placeholder {  /* Firefox 19+ */
-// 		font-family: 'Raleway', sans-serif;
-// 		letter-spacing: 0.1rem;
-// 		text-align: center;
-// 	}
+	::-moz-placeholder {  /* Firefox 19+ */
+		font-family: 'Josefin Sans', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		color: $gold;
+		font-size: 1.2rem;
+	}
 
-// 	:-ms-input-placeholder {  
-// 		font-family: 'Raleway', sans-serif;
-// 		letter-spacing: 0.1rem;
-// 		text-align: center;
-// 	}
-// }
+	:-ms-input-placeholder {  
+		font-family: 'Josefin Sans', sans-serif;
+		letter-spacing: 0.1rem;
+		text-align: center;
+		color: $gold;
+		font-size: 1.2rem;
+	}
+
 // Footer styling
 footer {
 	padding: 2rem;
@@ -106,9 +142,15 @@ footer h3 {
 footer 	a {
 	font-family: 'Raleway', sans-serif;
 	display: inline-block;
+	font-variant: small-caps;
+	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	margin-right: 1rem;
 	margin-left: 1rem;
+	color: $gold;
+}
+footer a:hover{
+	color: $gold-dark;
 }
 // ____________________________________________________________________
 // GAME PAGE STYLING
@@ -190,7 +232,8 @@ div.opp-game {
 // Summary PAGE STYLING
 // ____________________________________________________________________
 div.welcome-hero.hero {
-	padding: 5rem 1.62rem 3rem 1.62rem;
+	padding-top: 5rem;
+	margin: 0;
 	h1 {
 		font-family: 'Josefin Sans', sans-serif;
 		font-weight: 700;
@@ -198,6 +241,9 @@ div.welcome-hero.hero {
 		letter-spacing: 0.5rem;
 		color: $very-dark-gold;
 	}
+}
+div.row.new-game-full {
+	margin: 0;
 }
 div.new-game {
 	padding-bottom: 4rem;
@@ -216,14 +262,42 @@ div.new-game {
 	}
 }
 div.row.gold-background{
-	border-top: 0.3rem solid $light-gray;
-	border-bottom: 0.3rem solid $light-gray;
 	background-color: $gold;
+	padding: 2rem 2rem 4rem 2rem;
+	div.row.overview h3 {
+		margin: 0;
+	}
 }
 div.your-move, div.opp-move {
+	h4 {
+		padding-bottom: 1rem;
+		font-variant: small-caps;
+	}
 	background-color: white;
+	border-radius: 0.45rem;
+	padding: 2rem;
+	// active game button styling
+	button.button {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.3rem;
+		// background-color: $gold-dark;
+		// color: white;
+		border: 2px solid $gold;
+		width: 100%;
+		border-radius: 0.5rem;
+		color: $gold;
+		background-color: transparent;
+	}
+	button.button:hover {
+		color: $light-gray;
+		border-color: $light-gray;
+	}
+}
+div.median {
+	width: 10%;
 }
 div.row.summary {
+	width: 100%;
 	h3, h4 {
 		font-family: 'Raleway', sans-serif;
 		letter-spacing: 0.1rem;
@@ -231,18 +305,73 @@ div.row.summary {
 	}
 	h3 {
 		font-variant: small-caps;
-		font-size: 2.3rem;
-		padding: 1.5rem 0;
+		font-size: 3rem;
+		padding-bottom: 2rem;
 		color: $very-dark-gold;
+		margin: 0;
+	}
+	h4 {
+		font-size: 1.6rem;
 	}
 }
 div.row.welcome-span {
 	background-image:url('../../img/rps_ready_front.png');
 	background-repeat: no-repeat;
-	background-position: 45% -10vh;
+	background-position: 45%;
+	background-attachment: fixed;
 	background-height: 40vh;
 	// background-height: 10px;
-	background-size: 40%;
+	background-size: 90vh;
+}
+
+div.row.past-games {
+	background-image:url('../../img/large_hero_summary.png');
+	background-repeat: no-repeat;
+	background-position: 50% 100%;
+	background-size: 100%;
+	background-attachment: fixed;
+	padding: 3rem 1.5rem 5rem 1.5rem;
+	h4 {
+		font-variant: small-caps;
+		font-size: 1.6rem;
+		padding-bottom: 2rem;
+		color: $very-dark-gold;
+		margin: 0;
+	}
+	.row.row.table {
+		text-align: center;
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 2rem;
+		table {
+			border: none;
+			background-color: transparent;
+			tr {
+				margin-bottom: 2px;
+				background-color: rgba(158, 158, 158, 0.6);
+			}
+			td {
+				border: none;
+				font-size: 1.62rem;
+				border-bottom: 2px solid $gold;
+				color: white;
+				letter-spacing: 0.05rem;
+			}
+		}
+	}
+}
+div.row.sign-out {
+	background-color: $gold;
+	button, .button {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		background-color: white;
+		color: $gold;
+		margin-top: 2rem;
+		border-radius: 1rem;
+	}
+	button, .button:hover{
+		background-color: $gold-dark;
+	}
 }
 
 // ____________________________________________________________________
@@ -256,14 +385,25 @@ div.row.new-game-hero{
 		font-size: 5rem;
 		letter-spacing: 0.5rem;
 	}
+}
+div.new-game-full {
+	button {
+		display: inline-block;
+	}
 	background-image:url('../../img/rps_ready_hero.png');
+	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	background-position: 50% 30%;
-}
-div.new-game {
-	button {
-		display: inline-block;
+		button, .button {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		background-color: $gold;
+		margin-top: 2rem;
+		border-radius: 1rem;
+	}
+	button, .button:hover{
+		background-color: $gold-dark;
 	}
 }
 
