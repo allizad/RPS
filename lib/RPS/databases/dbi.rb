@@ -102,28 +102,32 @@ module RPS
       end
     end
 
-    def active_rounds?(game_id)
+    def get_active_round(game_id)
       result = @db.exec(%q[
         SELECT round_winner FROM rounds WHERE game_id = #{game_id};
         ])
+    end
 
+    def build_round(data)
+      RPS::Round.new(data)
     end
 
     def get_all_rounds_for_game_id(game_id)
         result = @db.exec_params(%q[
         SELECT * FROM rounds WHERE game_id = $1;
         ], [game_id])
-        return result
+
+        result.map {|row| build_round(row)}
     end
 
     def start_round(game_id)
       result = @db.exec_params(%q[
         INSERT INTO rounds (game_id)
         VALUES ($1)
-        RETURNING round_id;
+        RETURNING *;
         ], [game_id])
 
-      result.first['round_id']
+      build_round(result.first)
     end
 
     def player1_move(round_id, move)

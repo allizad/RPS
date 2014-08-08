@@ -19,11 +19,14 @@ module RPS
   end
 
   class Round
-    attr_reader :p1_move, :p1_move, :round_winner
+    attr_reader :round_id, :game_id, :p1_move, :p2_move, :round_winner
 
-    def initialize(p1_move, p2_move)
-      @p1_move = p1_move
-      @p2_move = p2_move
+    def initialize(data = {})
+      @round_id = data['round_id']
+      @game_id = data['game_id']
+      @p1_move = data['p1_move']
+      @p2_move = data['p2_move']
+      @round_winner = data['round_winner']
       # return winner
     end
 

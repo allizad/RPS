@@ -25,51 +25,24 @@
         <a class="button" href="/game/<%= @params[:username] %>/<%= @params[:game_id] %>/<%= @params[:round_id] %>/<%= m %>"><%=m%></a>
     <%end%>
 
-
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
 	<h3>Rounds</h3>
-	<table>
-		<thead>
-			<th>Round</th>
-			<th>Your Move</th>
-			<th>Opponent Move</th>
-			<th>Winner</th>
-		</thead>
-		<tbody>
-			<tr>
-			<!-- these data spots will be embedded with ruby -->
-				<td class="round-number">1</td>
-				<td>paper</td>
-				<td>rock</td>
-				<td>you!</td>
-			</tr>			
-			<tr>
-				<td class="round-number">2</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">3</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">4</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-			<tr>
-				<td class="round-number">5</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>			
-		</tbody>
-	</table>
+    <table>
+        <thead>
+            <th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
+        </thead>
+        <tbody>
+        <% rounds_counter = 1 %>
+        <% @game_rounds.each do |round| %>
+        <td><%= rounds_counter %></td>
+        <td><%= round.p1_move %></td>
+        <td><%= round.p2_move %></td>
+        <td><%= round.round_winner %></td>
+        <% rounds_counter += 1 %>
+        <% end %>
+        </tbody>
+    </table>
 
 </div> <!-- END OF game history div -->
 
