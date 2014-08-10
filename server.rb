@@ -19,24 +19,16 @@ end
  
 get '/summary' do
   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
-
-  # array of active game objects
-  # @active_games = RPS.dbi.get_active_games_for_username(session['RPS_session'])
   
   @my_turn_rounds = RPS.dbi.my_turn_rounds(session['RPS_session'])
-
   @game_id_of_my_turn_rounds = @my_turn_rounds.map {|round| round.game_id}
-
   @my_turn_data = []
-
   @game_id_of_my_turn_rounds.each do |game_id|
     hash = {}
     hash[:game_id] = game_id
     hash[:opponent] = RPS.dbi.opponent_name(session['RPS_session'], game_id)
     @my_turn_data << hash
   end
-
-  # binding.pry
 
   @past_games = RPS.dbi.get_past_games_for_username(session['RPS_session'])
 
@@ -78,21 +70,11 @@ end
  
 # from new game, you create a game with opponent
 post '/game/:username' do
-  # @opponent_username = params[:username]
-  # game_object = RPS::Game.new(session['RPS_session'], params[:username])
   game_object = RPS.dbi.start_game(session['RPS_session'], params[:username])
-  # binding.pry
 
   redirect to "/game/#{params[:username]}/#{game_object.game_id}"
 end
  
-# get '/game/:username/:game_id' do
-#   # method that automatically check the dbi to update any info => return a @variable 
-#   round = RPS.dbi.start_round(params[:game_id].to_i)
- 
-#   redirect to "/game/#{params[:username]}/#{params[:game_id]}/#{round}"
-# end
-
 get '/game/:username/:game_id' do
   @current_game = RPS.dbi.get_game_by_id(params[:game_id])
   # this code is for creating the table in :game
@@ -113,25 +95,32 @@ get '/game/:username/:game_id' do
   erb :game
 end
 
-
-
 post '/game/:username/:game_id/:round_id/:move' do
-  # @move = params[:move]
 
-  @player1 = RPS.dbi.player_1?(session['RPS_session'], params[:game_id])
-#if im player one:
-  if @player1
-    RPS.dbi.player1_move(params[:round_id], params[:move])
+  @round = RPS::Round.find(params[:round_id])
+  @game = RPS::Game.find(params[:game_id])
+
+  @round.record_move(session['RPS_session'],params[:move])
+
+  if @round.round_over?
+    @round.update_round_winner
+    if @game.game_over?
+      @game.update_game_winner
+      redirect to "/game/#{params[:username]}/#{params[:game_id]}/game-over"
+    else
+      redirect to "/game/#{params[:username]}/#{params[:game_id]}"
+    end
   else
-    RPS.dbi.player2_move(params[:round_id], params[:move])
-    #determine winner
+    redirect to "/game/#{params[:username]}/#{params[:game_id]}"
   end
-#player_2 move
 
-  # create values for opponent username, game id, round id 
-  # start a new round
- 
-  redirect to "/game/#{params[:username]}/#{params[:game_id]}"
+end
+
+get '/game/:username/:game_id/game-over' do
+
+  @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
+
+erb :game_over
 end
  
 get '/game' do
