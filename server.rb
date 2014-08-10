@@ -79,20 +79,22 @@ post '/game/:username' do
 end
  
 get '/game/:username/:game_id' do
-  
+  @current_game = RPS.dbi.get_game_by_id(params[:game_id])
+  # this code is for creating the table in :game
+  # uses game id to grab all of the rounds for this game
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
+  # determines which out of those rounds is active
   @active_round = @game_rounds.find {|r| r.active?}
+  # deletes that active round so moves don't display until the round is over
   @game_rounds.delete(@active_round)
 
-  @player1_name = RPS.dbi.get_player1_name(params[:game_id])['player1']
-  @player2_name = RPS.dbi.get_player2_name(params[:game_id])['player2']
- 
   if !@active_round
-    @active_round = RPS.dbi.start_round(params[:game_id].to_i, @player1_name, @player2_name)
-  else
-    @active_round
+    @active_round = RPS.dbi.start_round(params[:game_id].to_i, @current_game.player1, @current_game.player2)
   end
- 
+
+  @user_name = session['RPS_session']
+  @user_move = @active_round.move_for(@user_name)
+
   erb :game
 end
 

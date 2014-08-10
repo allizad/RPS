@@ -92,6 +92,14 @@ module RPS
     def build_game(data)
       RPS::Game.new(data)
     end
+
+    def get_game_by_id(game_id)
+      result = @db.exec_params(%Q[
+        SELECT * FROM games WHERE game_id = $1;
+      ], [game_id])
+      game_object = build_game(result.first)
+      game_object       
+    end
  
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
@@ -237,7 +245,7 @@ module RPS
         SET p2_move = $2
         WHERE round_id = $1;
         ], [round_id, move])
-    end 
+    end
  
     def player_1?(username, game_id)
       result = @db.exec_params(%q[
@@ -246,9 +254,9 @@ module RPS
         WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
-        return true
+        true
       else
-        return false
+        false
       end
     end
 
@@ -277,9 +285,9 @@ module RPS
         WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
-        return result.first['player2']
+        result.first['player2']
       else
-        return result.first['player1']
+        result.first['player1']
       end
     end
 

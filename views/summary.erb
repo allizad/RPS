@@ -12,13 +12,7 @@
 </div>
 
 <!-- chris test -->
-<div class="opponent-buttons large-6 columns">
-	<% @my_turn_data.each do |x| %>
-		<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>" method="get">
-			<button class="button"> <%= x[:opponent]%> </button>
-		</form>
-	<%end%>
-</div>
+
 <!-- chris test -->
 
 
@@ -29,21 +23,30 @@
 		<h3>current games</h3>
 	</div>
 	
-	<div class="large-5 medium-5 columns your-move" data-equalizer-watch>
-		<h4>throw your move</h4>
-		<!-- active game buttons -->
+	<div class="large-6 medium-6 columns your-move" data-equalizer-watch>
 
-		<!-- form erb populated -->
-
-		<button class="button"> VS allizad</button>
+			<div class="opponent-buttons centered columns" data-equalizer-watch>
+			<div class="white">
+			<h4>throw your move</h4>
+				<% @my_turn_data.each do |x| %>
+					<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>" method="get">
+						<button class="button"> VS <%= x[:opponent]%> </button>
+					</form>
+				<%end%>
+			</div>
+		</div>
 	</div>
-	<div class="large-1 medium-1 columns median" data-equalizer-watch><br></div>
+
 	<!-- div showing games in progress that are opponents turn -->
-	<div class="large-5 medium-5 columns opp-move" data-equalizer-watch>
-		<h4>waiting for opponent</h4>
-		<!-- active game buttons - waiting for user -->
-		<!-- form populated erb -->
-		<form></form>
+	<div class="large-6 medium-6 columns opp-move" data-equalizer-watch>
+		<div class="white">
+			<h4>waiting for opponent</h4>
+
+			<!-- active game buttons - waiting for user -->
+			<!-- form populated erb -->
+			<form></form>
+		</div>
+
 	</div>
 </div>
 
@@ -53,8 +56,8 @@
 		<h3>past games</h3>
 	</div>
 
-	<div class="row" data-equalizer>
-		<div class="large-5 medium-5 columns wins" data-equalizer-watch>
+	<div class="row">
+		<div class="large-5 medium-5 columns wins">
 		<h4>wins</h4>
 		<div class="row table">
 		<div class="medium-3 large-3 columns"><br></div>
@@ -67,7 +70,7 @@
 		</div>
 		</div>
 
-		<div class="large-1 medium-1 columns median" data-equalizer-watch><br></div>
+		<div class="large-1 medium-1 columns median"><br></div>
 
 		<div class="large-5 medium-5 columns losses">
 		<h4>losses</h4>
@@ -85,6 +88,7 @@
 	</div>
 </div>
 <div class="row sign-out">
+	<form action="/signout" method="post">
 	<button class="button">Sign Out</button>
 </div>
 

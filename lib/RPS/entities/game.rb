@@ -51,9 +51,17 @@ module RPS
       @p1_move == nil || @p2_move == nil
     end
 
+    def move_for(player)
+      if player == player1
+        p1_move
+      elsif player == player2
+        p2_move
+      end
+    end
+
     def winner
       if p1_move == p2_move
-        return "tie"
+        "tie"
       elsif p1_move == "rock"
         if p2_move == "paper"
           return player2
