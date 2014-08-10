@@ -1,324 +1,68 @@
-@import url(http://fonts.googleapis.com/css?family=Josefin+Sans:400,700,300italic|Raleway);
-a {
-  transition: all .2s ease-in-out; }
+/*
+Syntax error: Invalid CSS after "...or: transparent": expected ";", was "&.chosen{"
+        on line 171 of my_scss.scss
 
-button {
-  transition: all .2s ease-in-out; }
+166: 		letter-spacing: 0.1rem;
+167: 		margin-top: 2rem;
+168: 		border-radius: 1rem;
+169: 		.button-no-hover{
+170: 			background-color: transparent
+171: 			&.chosen{
+172: 				background-color: white;
+173: 				color: $gold;
+174: 			}
+175: 		}
+176: 		&.move{
 
-body {
-  display: block;
-  text-align: center; }
-
-body div.row {
-  margin: 0;
-  max-width: 100%; }
-
-span.flash-homepage {
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.5rem;
-  color: rgba(203, 163, 71, 0.6);
-  width: 100%;
-  padding: 1rem; }
-
-div.index {
-  background-image: url("../../img/large_rps.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 100%; }
-
-div.main-hero {
-  padding: 6rem 1.62rem; }
-
-div.hero {
-  padding: 3rem 1.62rem; }
-  div.hero h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    font-size: 5rem;
-    letter-spacing: 0.5rem; }
-
-input.button.radius {
-  border-radius: 0.9rem; }
-
-div.row.sign-in h3 {
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 3.1rem;
-  font-variant: small-caps;
-  letter-spacing: -0.01rem; }
-div.row.sign-in input {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  border-bottom: 1px solid #b5b5b5;
-  margin: auto; }
-  div.row.sign-in input .button .round {
-    width: 12.3rem;
-    border-radius: 2rem; }
-div.row.sign-in input {
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: 0.1rem;
-  text-align: center; }
-div.row.sign-in input.button.radius.large-6.medium-6.small-6.columns {
-  padding: 1rem; }
-div.row.sign-in button, div.row.sign-in .button {
-  font-family: 'Raleway', sans-serif;
-  letter-spacing: 0.1rem;
-  background-color: #cca347;
-  margin-top: 2rem; }
-div.row.sign-in button, div.row.sign-in .button:hover {
-  background-color: #7f662c; }
-
-::-webkit-input-placeholder {
-  font-family: 'Josefin Sans', sans-serif;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  color: #cca347;
-  font-size: 1.2rem; }
-
-:-moz-placeholder {
-  /* Firefox 18- */
-  font-family: 'Josefin Sans', sans-serif;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  color: #cca347;
-  font-size: 1.2rem; }
-
-::-moz-placeholder {
-  /* Firefox 19+ */
-  font-family: 'Josefin Sans', sans-serif;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  color: #cca347;
-  font-size: 1.2rem; }
-
-:-ms-input-placeholder {
-  font-family: 'Josefin Sans', sans-serif;
-  letter-spacing: 0.1rem;
-  text-align: center;
-  color: #cca347;
-  font-size: 1.2rem; }
-
-footer {
-  padding: 2rem; }
-
-footer h3 {
-  font-family: 'Josefin Sans', sans-serif;
-  letter-spacing: 0.05rem; }
-
-footer a {
-  font-family: 'Raleway', sans-serif;
-  display: inline-block;
-  font-variant: small-caps;
-  font-size: 1.3rem;
-  letter-spacing: 0.1rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  color: #cca347; }
-
-footer a:hover {
-  color: #7f662c; }
-
-div.row .game-page {
-  margin: 0;
-  padding: 0; }
-
-div.row .game-div {
-  font-family: 'Raleway', sans-serif;
-  max-width: 100%;
-  margin-right: 0;
-  margin-left: 0;
-  padding-top: 2rem; }
-  div.row .game-div h3 {
-    padding-bottom: 1.5rem;
-    padding-top: 1.5rem;
-    font-family: 'Raleway', sans-serif;
-    font-size: 2.5rem; }
-  div.row .game-div div.user-game a.button {
-    font-family: 'Raleway', sans-serif;
-    font-style: bold;
-    background-color: #cca347;
-    width: 100%;
-    border-radius: 0.9rem;
-    letter-spacing: 0.1rem;
-    margin-bottom: 0.5rem; }
-  div.row .game-div div.user-game a.button:hover {
-    background-color: #7f662c; }
-  div.row .game-div div.user-game a.button .disabled {
-    background-color: #7f662c; }
-  div.row .game-div div.user-game a.button .disabled:hover {
-    background-color: #7f662c; }
-
-div.user-game, div.game-history, div.opp-game {
-  width: 30.666667%;
-  background-color: #b5b5b5;
-  border-radius: 4%; }
-
-div.user-game {
-  margin-left: 2%;
-  margin-right: 1%; }
-
-div.game-history {
-  margin-right: 1%;
-  margin-left: 1%; }
-  div.game-history table {
-    background-color: transparent;
-    border: none; }
-    div.game-history table thead {
-      background-color: transparent; }
-      div.game-history table thead tr th {
-        color: white; }
-    div.game-history table tr {
-      background-color: transparent; }
-  div.game-history div.game-history table body tr td.round-number {
-    color: #cca347; }
-
-div.opp-game {
-  margin-left: 1%;
-  margin-right: 2%; }
-  div.opp-game p {
-    font-size: 2rem; }
-
-div.welcome-hero.hero {
-  padding-top: 5rem;
-  margin: 0; }
-  div.welcome-hero.hero h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    font-size: 5rem;
-    letter-spacing: 0.5rem;
-    color: #261f0f; }
-
-div.row.new-game-full {
-  margin: 0; }
-
-div.new-game {
-  padding-bottom: 4rem; }
-  div.new-game input.button.radius.large-6.medium-6.small-6.columns {
-    padding: 1rem; }
-  div.new-game button, div.new-game .button {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.1rem;
-    background-color: #cca347;
-    margin-top: 2rem;
-    border-radius: 1rem; }
-  div.new-game button, div.new-game .button:hover {
-    background-color: #7f662c; }
-
-div.row.gold-background {
-  background-color: #cca347;
-  padding: 2rem 2rem 4rem 2rem; }
-  div.row.gold-background div.row.overview h3 {
-    margin: 0; }
-
-div.your-move, div.opp-move {
-  background-color: white;
-  border-radius: 0.45rem;
-  padding: 2rem; }
-  div.your-move h4, div.opp-move h4 {
-    padding-bottom: 1rem;
-    font-variant: small-caps; }
-  div.your-move button.button, div.opp-move button.button {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.3rem;
-    border: 2px solid #cca347;
-    width: 100%;
-    border-radius: 0.5rem;
-    color: #cca347;
-    background-color: transparent; }
-  div.your-move button.button:hover, div.opp-move button.button:hover {
-    color: #b5b5b5;
-    border-color: #b5b5b5; }
-
-div.median {
-  width: 10%; }
-
-div.row.summary {
-  width: 100%; }
-  div.row.summary h3, div.row.summary h4 {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.1rem; }
-  div.row.summary h3 {
-    font-variant: small-caps;
-    font-size: 3rem;
-    padding-bottom: 2rem;
-    color: #261f0f;
-    margin: 0; }
-  div.row.summary h4 {
-    font-size: 1.6rem; }
-
-div.row.welcome-span {
-  background-image: url("../../img/rps_ready_front.png");
-  background-repeat: no-repeat;
-  background-position: 45%;
-  background-attachment: fixed;
-  background-height: 40vh;
-  background-size: 90vh; }
-
-div.row.past-games {
-  background-image: url("../../img/large_hero_summary.png");
-  background-repeat: no-repeat;
-  background-position: 50% 100%;
-  background-size: 100%;
-  background-attachment: fixed;
-  padding: 3rem 1.5rem 5rem 1.5rem; }
-  div.row.past-games h4 {
-    font-variant: small-caps;
-    font-size: 1.6rem;
-    padding-bottom: 2rem;
-    color: #261f0f;
-    margin: 0; }
-  div.row.past-games .row.row.table {
-    text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 2rem; }
-    div.row.past-games .row.row.table table {
-      border: none;
-      background-color: transparent; }
-      div.row.past-games .row.row.table table tr {
-        margin-bottom: 2px;
-        background-color: rgba(158, 158, 158, 0.6); }
-      div.row.past-games .row.row.table table td {
-        border: none;
-        font-size: 1.62rem;
-        border-bottom: 2px solid #cca347;
-        color: white;
-        letter-spacing: 0.05rem; }
-
-div.row.sign-out {
-  background-color: #cca347; }
-  div.row.sign-out button, div.row.sign-out .button {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.1rem;
-    background-color: white;
-    color: #cca347;
-    margin-top: 2rem;
-    border-radius: 1rem; }
-  div.row.sign-out button, div.row.sign-out .button:hover {
-    background-color: #7f662c; }
-
-div.row.new-game-hero {
-  padding: 4rem 1.62rem 5rem 1.62rem; }
-  div.row.new-game-hero h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    font-size: 5rem;
-    letter-spacing: 0.5rem; }
-
-div.new-game-full {
-  background-image: url("../../img/rps_ready_hero.png");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: 50% 30%; }
-  div.new-game-full button {
-    display: inline-block; }
-  div.new-game-full button, div.new-game-full .button {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.1rem;
-    background-color: #cca347;
-    margin-top: 2rem;
-    border-radius: 1rem; }
-  div.new-game-full button, div.new-game-full .button:hover {
-    background-color: #7f662c; }
+Backtrace:
+my_scss.scss:171
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1312:in `expected'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1248:in `expected'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1243:in `tok!'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:692:in `block in declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `call'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `rethrow'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:698:in `declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:660:in `block_child'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:649:in `block_contents'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:641:in `block'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:634:in `ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:697:in `block in declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `call'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `rethrow'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:698:in `declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:660:in `block_child'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:652:in `block_contents'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:641:in `block'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:634:in `ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:697:in `block in declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `call'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:1288:in `rethrow'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:698:in `declaration_or_ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:660:in `block_child'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:652:in `block_contents'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:641:in `block'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:634:in `ruleset'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:659:in `block_child'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:652:in `block_contents'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:116:in `stylesheet'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/scss/parser.rb:41:in `parse'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/engine.rb:409:in `_to_tree'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/engine.rb:274:in `render'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:484:in `update_stylesheet'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:214:in `block in update_stylesheets'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:208:in `each'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:208:in `update_stylesheets'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:462:in `on_file_changed'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/lib/sass/plugin/compiler.rb:324:in `block in watch'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/listener.rb:252:in `call'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/listener.rb:252:in `on_change'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
+/home/vagrant/.rbenv/versions/2.0.0-p481/lib/ruby/gems/2.0.0/gems/sass-3.3.14/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"...or: transparent\": expected \";\", was \"&.chosen{\"\A         on line 171 of my_scss.scss\A \A 166: 		letter-spacing: 0.1rem;\A 167: 		margin-top: 2rem;\A 168: 		border-radius: 1rem;\A 169: 		.button-no-hover{\A 170: 			background-color: transparent\A 171: 			&.chosen{\A 172: 				background-color: white;\A 173: 				color: $gold;\A 174: 			}\A 175: 		}\A 176: 		&.move{"; }

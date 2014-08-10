@@ -193,16 +193,16 @@ module RPS
         SET p2_move = $2
         WHERE round_id = $1;
         ], [round_id, move])
-    end 
+    end
  
     def player_1?(username, game_id)
       result = @db.exec_params(%q[
         SELECT player1 FROM games WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
-        return true
+        true
       else
-        return false
+        false
       end
     end
 
@@ -221,9 +221,9 @@ module RPS
         SELECT * FROM games WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
-        return result.first['player2']
+        result.first['player2']
       else
-        return result.first['player1']
+        result.first['player1']
       end
     end
 

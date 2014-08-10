@@ -96,19 +96,22 @@ end
 get '/game/:username/:game_id' do
   
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
- 
-  @active_round = @game_rounds.find {|r| r.active?}
- 
-  @game_rounds.delete(@active_round)
+  # @game_rounds.delete(@active_round)
 
   player1_name = RPS.dbi.get_player1_name(params[:game_id])['player1']
   player2_name = RPS.dbi.get_player2_name(params[:game_id])['player2']
- 
+  @active_round = @game_rounds.find {|r| r.active?}
+  # this finds the active round and sets it equal to @active_round. If it doesn't find one, it sets it to nil.
   if !@active_round
+    # this will start a new round if there's not an active round. (as opposed to nil)
     @active_round = RPS.dbi.start_round(params[:game_id].to_i, player1_name, player2_name)
-  else
-    @active_round
   end
+ 
+
+
+  @user_name = session['RPS_session']
+  @user_move = @active_round.move_for(@user_name)
+
  
   erb :game
 end

@@ -1,4 +1,4 @@
-
+<div class="game-page-styling">
 <div class="row game-page">
 	
 	<div class="row hero"> <!-- game header title -->
@@ -17,22 +17,28 @@
 		<form method="post" action="/move/scissors">
 			<div><input class="button" type='submit' value='Scissors'/></div>
 		</form> -->
-
-    <% moves_array = ["rock", "paper", "scissors"] %>
-	<% moves_array.each do |m| %>
-    <form action="/game/<%= @params[:username]%>/<%= @params[:game_id]%>/<%= @active_round.round_id%>/<%=m%>" method="post">
-    	<button class="button"><%=m%></button>
-    </form>
-    <%end%>
-
+        <!-- if user move dne - do this -->
+    <% moves=["rock", "paper", "scissors"]%>
+    <% moves.each do |m|%>
+        <% if @user_move && @user_move != m %>
+            <form><button class="button move not-chosen button-no-hover" disabled="disabled"><%= m %></button></form>
+        <% elsif @user_move && @usermove == m %>
+            <form><button class="button move chosen button-no-hover" disabled="disabled"><%= m %></button></form>
+        <% else %>        
+            <form action="/game/<%= @params[:username]%>/<%= @params[:game_id]%>/<%= @active_round.round_id%>/<%= m%>" method="post">
+    	       <button class="button move"><%= m %></button>
+            </form>
+        <% end %>
+    <% end %>
 
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
 	<h3>Rounds</h3>
 
+<div class="large centered columns">
     <table>
         <thead>
-            <th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
+            <th>round</th><th>your move</th><th>their move</th><th>winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>
@@ -45,15 +51,22 @@
         <% end %>
         </tbody>
     </table>
+</div>
 
 
 </div> <!-- END OF game history div -->
 
 <div class="large-4 medium-4 columns opp-game" data-equalizer-watch> <!-- Opponent Div -->
 	<h3>Opponent Move</h3>
-	<p>Waiting<br>...</p>
+	<p>waiting</p>
 </div><!-- end of opponent div -->
 </div> <!-- END OF game-div -->
+</div>
+<footer>
+    <form action="/summary" method="get">
+        <button class="button return">Return to Summary</button>
+    </form>
+</footer>
 </div>
 
 
