@@ -31,6 +31,22 @@ module RPS
       end
     end
 
+    def self.past_games(username)
+      RPS.dbi.get_past_games_for_username(username)
+    end
+
+    def game_id_and_opponent_hash(username)
+      hash = {}
+        if username == player1
+          hash[:opponent] = player2
+          hash[:game_id] = game_id
+        elsif username == player2
+          hash[:opponent] = player1
+          hash[:game_id] = game_id
+        end
+      return hash
+    end
+
   end
 
   class Round
@@ -106,6 +122,33 @@ module RPS
       @round_winner = winner
     end
 
+    def self.my_turn_rounds(username)
+      RPS.dbi.my_turn_rounds(username)
+    end
+
+    def self.not_my_turn_rounds(username)
+      RPS.dbi.not_my_turn_rounds(username)
+    end
+
+    # def opponent_name(username)
+    #   if username == player1
+    #     return player2
+    #   elsif username == player2
+    #     return player1
+    #   end
+    # end
+
+    def game_id_and_opponent_hash(username)
+        hash = {}
+        if username == player1
+          hash[:opponent] = player2
+          hash[:game_id] = game_id
+        elsif username == player2
+          hash[:opponent] = player1
+          hash[:game_id] = game_id
+        end
+        return hash
+    end
 
 
   end

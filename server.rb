@@ -20,20 +20,37 @@ end
 get '/summary' do
   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
 
-  # my_turn_round_objects
-  # not_my_turn_round_objects
+  @my_turn_round_objects = RPS::Round.my_turn_rounds(session['RPS_session'])
   
-  @my_turn_rounds = RPS.dbi.my_turn_rounds(session['RPS_session'])
-  @game_id_of_my_turn_rounds = @my_turn_rounds.map {|round| round.game_id}
-  @my_turn_data = []
-  @game_id_of_my_turn_rounds.each do |game_id|
-    hash = {}
-    hash[:game_id] = game_id
-    hash[:opponent] = RPS.dbi.opponent_name(session['RPS_session'], game_id)
-    @my_turn_data << hash
+  @not_my_turn_round_objects = RPS::Round.not_my_turn_rounds(session['RPS_session'])
+  
+  # @my_turn_data = RPS::Round.game_id_and_opponent_array_of_hashes(@my_turn_round_objects, session['RPS_session'])
+  # @not_my_turn_data = RPS::Round.game_id_and_opponent_array_of_hashes(@not_my_turn_round_objects, session['RPS_session'])
+
+  @my_turn_data = @my_turn_round_objects.map do |round|
+    round.game_id_and_opponent_hash(session['RPS_session'])
   end
 
-  @past_games = RPS.dbi.get_past_games_for_username(session['RPS_session'])
+  @not_my_turn_data = @not_my_turn_round_objects.map do |round|
+    round.game_id_and_opponent_hash(session['RPS_session'])
+  end
+
+  # binding.pry
+  # @my_turn_rounds = RPS.dbi.my_turn_rounds(session['RPS_session'])
+  # @game_id_of_my_turn_rounds = @my_turn_rounds.map {|round| round.game_id}
+  # @my_turn_data = []
+  # @game_id_of_my_turn_rounds.each do |game_id|
+  #   hash = {}
+  #   hash[:game_id] = game_id
+  #   hash[:opponent] = RPS.dbi.opponent_name(session['RPS_session'], game_id)
+  #   @my_turn_data << hash
+  # end
+
+  @past_game_objects = RPS::Game.past_games(session['RPS_session'])
+
+  @past_game_data = @past_game_objects.map do |game|
+    game.game_id_and_opponent_hash(session['RPS_session'])
+  end
 
   erb :summary
 end
