@@ -34,6 +34,8 @@ module RPS
           round_winner text
           )])
     end
+
+    #### USERS ####
  
     def register_user(user)
         @db.exec_params(%q[
@@ -44,7 +46,9 @@ module RPS
  
     def get_user_by_username(username)
       result = @db.exec(%Q[
-        SELECT * FROM users WHERE username = '#{username}';
+        SELECT *
+        FROM users
+        WHERE username = '#{username}';
       ])
  
       user_data = result.first
@@ -58,7 +62,9 @@ module RPS
  
     def username_exists?(username)
       result = @db.exec(%Q[
-        SELECT * FROM users WHERE username = '#{username}';
+        SELECT *
+        FROM users
+        WHERE username = '#{username}';
       ])
  
       if result.count > 0
@@ -74,7 +80,9 @@ module RPS
  
     def opponent_list(session_username)
       result = @db.exec_params(%Q[
-        SELECT username FROM users WHERE username != $1;
+        SELECT username
+        FROM users
+        WHERE username != $1;
       ],[session_username])
       return result
     end
@@ -98,7 +106,11 @@ module RPS
 
     def get_active_games_for_username(username)
       result = @db.exec_params(%q[
-        SELECT * FROM games WHERE player1 = $1 OR player2 = $1 AND game_winner IS NULL;
+        SELECT *
+        FROM games
+        WHERE player1 = $1
+        OR player2 = $1
+        AND game_winner IS NULL;
         ], [username])
 
       result.map {|row| build_game(row) }
@@ -106,20 +118,26 @@ module RPS
 
     def get_past_games_for_username(username)
       result = @db.exec_params(%q[
-        SELECT * FROM games WHERE game_winner IS NOT NULL;
+        SELECT *
+        FROM games
+        WHERE game_winner IS NOT NULL;
         ])
     end
 
     def get_player1_name(game_id)
       result = @db.exec_params(%q[
-        SELECT player1 FROM games WHERE game_id = $1;
+        SELECT player1
+        FROM games
+        WHERE game_id = $1;
         ], [game_id])
       result.first
     end
  
     def get_player2_name(game_id)
       result = @db.exec_params(%q[
-        SELECT player2 FROM games WHERE game_id = $1;
+        SELECT player2
+        FROM games
+        WHERE game_id = $1;
         ], [game_id])
       result.first
     end
@@ -127,7 +145,9 @@ module RPS
 
     def game_over?(game_id, player1, player2)
       result = @db.exec(%Q[
-        SELECT round_winner FROM rounds WHERE game_id = $1;
+        SELECT round_winner
+        FROM rounds
+        WHERE game_id = $1;
       ], [game_id])
 
       if result.count(player1.user_id) > 2
@@ -137,25 +157,19 @@ module RPS
       end
     end
 
+    def complete_rounds(game_id)
+      result = @db.exec_params(%q[
+        SELECT round_winner
+        FROM rounds
+        WHERE game_id = $1;
+        ], [game_id])
+      
+      result.map{|x| x['round_winner']}
+
+    end
+
 
     #### ROUNDS ####
-
-    # def has_rounds?(game_id)
-    #   result = @db.exec(%q[
-    #     SELECT round_id FROM rounds WHERE game_id = '#{game_id}'
-    #     ])
-    #   if result.first == nil
-    #     return false
-    #   else
-    #     return true
-    #   end
-    # end
-
-    # def get_active_round(game_id)
-    #   result = @db.exec(%q[
-    #     SELECT round_winner FROM rounds WHERE game_id = #{game_id};
-    #     ])
-    # end
 
     def build_round(data)
       RPS::Round.new(data)
@@ -163,7 +177,9 @@ module RPS
  
     def get_all_rounds_for_game_id(game_id)
         result = @db.exec_params(%q[
-        SELECT * FROM rounds WHERE game_id = $1;
+        SELECT *
+        FROM rounds
+        WHERE game_id = $1;
         ], [game_id])
  
         result.map {|row| build_round(row)}
@@ -197,7 +213,9 @@ module RPS
  
     def player_1?(username, game_id)
       result = @db.exec_params(%q[
-        SELECT player1 FROM games WHERE game_id = $1;
+        SELECT player1
+        FROM games
+        WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
         return true
@@ -226,7 +244,9 @@ module RPS
 
     def opponent_name(username, game_id)
       result = @db.exec_params(%q[
-        SELECT * FROM games WHERE game_id = $1;
+        SELECT *
+        FROM games
+        WHERE game_id = $1;
         ], [game_id])
       if result.first['player1'] == username
         return result.first['player2']

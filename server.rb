@@ -131,7 +131,10 @@ post '/game/:username/:game_id/:round_id/:move' do
     last_round = game_rounds.last
     @round_winner = last_round.winner
     RPS.dbi.round_winner(@round_winner, last_round.round_id)
-    #determine round winner
+    complete_rounds = RPS.dbi.complete_rounds(params[:game_id])
+    if complete_rounds.count("") 
+
+    binding.pry
     #check if game winner
   end
 #player_2 move
