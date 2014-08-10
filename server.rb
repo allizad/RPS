@@ -104,7 +104,7 @@ post '/game/:username/:game_id/:round_id/:move' do
     @round.update_round_winner
     if @game.game_over?
       @game.update_game_winner
-      redirect to "/game/#{params[:username]}/#{params[:game_id]}/game_over"
+      redirect to "/game/#{params[:username]}/#{params[:game_id]}/game-over"
     else
       redirect to "/game/#{params[:username]}/#{params[:game_id]}"
     end
@@ -112,6 +112,13 @@ post '/game/:username/:game_id/:round_id/:move' do
     redirect to "/game/#{params[:username]}/#{params[:game_id]}"
   end
 
+end
+
+get '/game/:username/:game_id/game-over' do
+
+  @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
+
+erb :game_over
 end
  
 get '/game' do
