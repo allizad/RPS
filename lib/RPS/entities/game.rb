@@ -18,6 +18,7 @@ module RPS
     # def game_winner
       
     # end
+
   end
 
   class Round
@@ -38,34 +39,26 @@ module RPS
       @p1_move == nil || @p2_move == nil
     end
 
-    # def round_over?
-    #   if @p1_move == nil || @p2_move == nil
-    #     false
-    #   else
-    #     true
-    #   end
-    # end
-
-    def winner(p1_move, p2_move)
+    def winner
       if p1_move == p2_move
         return "tie"
       elsif p1_move == "rock"
         if p2_move == "paper"
-          return "player2"
+          return player2
         elsif p2_move == "scissors"
-          return "player1"
+          return player1
         end
       elsif p1_move == "paper"
         if p2_move == "rock"
-          return "player1"
+          return player1
         elsif p2_move == "scissors"
-          return "player1"
+          return player2
         end
       elsif p1_move == "scissors"
         if p2_move == "paper"
-          return "player1"
+          return player1
         elsif p2_move == "rock"
-          return "player2"
+          return player2
         end
       end
     end

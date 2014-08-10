@@ -101,11 +101,13 @@ get '/game/:username/:game_id' do
  
   @game_rounds.delete(@active_round)
 
-  player1_name = RPS.dbi.get_player1_name(params[:game_id])['player1']
-  player2_name = RPS.dbi.get_player2_name(params[:game_id])['player2']
+  # binding.pry
+
+  @player1_name = RPS.dbi.get_player1_name(params[:game_id])['player1']
+  @player2_name = RPS.dbi.get_player2_name(params[:game_id])['player2']
  
   if !@active_round
-    @active_round = RPS.dbi.start_round(params[:game_id].to_i, player1_name, player2_name)
+    @active_round = RPS.dbi.start_round(params[:game_id].to_i, @player1_name, @player2_name)
   else
     @active_round
   end
@@ -124,7 +126,13 @@ post '/game/:username/:game_id/:round_id/:move' do
     RPS.dbi.player1_move(params[:round_id], params[:move])
   else
     RPS.dbi.player2_move(params[:round_id], params[:move])
-    #determine winner
+    game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
+    # binding.pry
+    last_round = game_rounds.last
+    @round_winner = last_round.winner
+    RPS.dbi.round_winner(@round_winner, last_round.round_id)
+    #determine round winner
+    #check if game winner
   end
 #player_2 move
 

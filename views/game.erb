@@ -32,17 +32,19 @@
 
     <table>
         <thead>
-            <th>Round</th><th>Your Move</th><th>Opponent Move</th><th>Winner</th>
+            <th>Round</th><th><%= @player1_name %></th><th><%= @player2_name %></th><th>Winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>
         <% @game_rounds.each do |round| %>
+        <tr>
         <td><%= rounds_counter %></td>
         <td><%= round.p1_move %></td>
         <td><%= round.p2_move %></td>
         <td><%= round.round_winner %></td>
         <% rounds_counter += 1 %>
         <% end %>
+        </tr>
         </tbody>
     </table>
 
