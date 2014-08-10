@@ -84,6 +84,14 @@ module RPS
     def build_game(data)
       RPS::Game.new(data)
     end
+
+    def get_game_by_id(game_id)
+      result = @db.exec_params(%Q[
+        SELECT * FROM games WHERE game_id = $1;
+      ], [game_id])
+      game_object = build_game(result.first)
+      game_object       
+    end
  
     def start_game(player1_username, player2_username)
       result = @db.exec_params(%q[
