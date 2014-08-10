@@ -168,6 +168,16 @@ module RPS
 
     end
 
+    def find_game_by_id(game_id)
+      result = @db.exec_params(%q[
+        SELECT *
+        FROM games
+        WHERE game_id = $1;
+        ], [game_id])
+
+      build_game(result.first)
+    end
+
     def update_game_winner(game_winner, game_id)
         @db.exec_params(%q[
         UPDATE games
@@ -191,6 +201,16 @@ module RPS
         ], [game_id])
  
         result.map {|row| build_round(row)}
+    end
+
+    def find_round_by_id(round_id)
+      result = @db.exec_params(%q[
+        SELECT *
+        FROM rounds
+        WHERE round_id = $1;
+        ], [round_id])
+
+      build_round(result.first)
     end
  
     def start_round(game_id, player1, player2)

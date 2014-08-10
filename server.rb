@@ -94,38 +94,24 @@ get '/game/:username/:game_id' do
 end
 
 post '/game/:username/:game_id/:round_id/:move' do
-  @player1 = RPS.dbi.player_1?(session['RPS_session'], params[:game_id])
-#if im player one:
-  if @player1
-    RPS.dbi.player1_move(params[:round_id], params[:move])
-    last_round = RPS.dbi.get_all_rounds_for_game_id(params[:game_id]).last
-    if last_round.round_over?
-      RPS.dbi.insert_round_winner(last_round.winner, last_round.round_id)
-      round_winner_usernames = RPS.dbi.complete_rounds(params[:game_id])
-      opponent_name = RPS.dbi.opponent_name(session['RPS_session'], params[:game_id])
-      if round_winner_usernames.count(session['RPS_session']) > 2
-        RPS.dbi.update_game_winner(session['RPS_session'], params[:game_id])
-      elsif round_winner_usernames.count(opponent_name) > 2
-        RPS.dbi.update_game_winner(opponent_name, params[:game_id])
-      end
+
+  @round = RPS::Round.find(params[:round_id])
+  @game = RPS::Game.find(params[:game_id])
+
+  @round.record_move(session['RPS_session'],params[:move])
+
+  if @round.round_over?
+    @round.update_round_winner
+    if @game.game_over?
+      @game.update_game_winner
+      redirect to "/game/#{params[:username]}/#{params[:game_id]}/game_over"
+    else
+      redirect to "/game/#{params[:username]}/#{params[:game_id]}"
     end
-  elsif !@player1
-    RPS.dbi.player2_move(params[:round_id], params[:move])
-    last_round = RPS.dbi.get_all_rounds_for_game_id(params[:game_id]).last
-    if last_round.round_over?
-      RPS.dbi.insert_round_winner(last_round.winner, last_round.round_id)
-      round_winner_usernames = RPS.dbi.complete_rounds(params[:game_id])
-      opponent_name = RPS.dbi.opponent_name(session['RPS_session'], params[:game_id])
-      if round_winner_usernames.count(session['RPS_session']) > 2
-        RPS.dbi.update_game_winner(session['RPS_session'], params[:game_id])
-      elsif round_winner_usernames.count(opponent_name) > 2
-        RPS.dbi.update_game_winner(opponent_name, params[:game_id])
-      end
-    end
+  else
+    redirect to "/game/#{params[:username]}/#{params[:game_id]}"
   end
-  #if game winner, redirect to game-over page
-  #else..
-  redirect to "/game/#{params[:username]}/#{params[:game_id]}"
+
 end
  
 get '/game' do
@@ -134,7 +120,7 @@ erb :game
 end
  
  
-get '/signout' do
+post '/signout' do
  session.clear
  redirect to '/'
 end
