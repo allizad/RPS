@@ -1,0 +1,43 @@
+
+<div class="row game-page">
+	
+	<div class="row hero"> <!-- game header title -->
+		<h1>SHOOT!</h1>
+	</div> <!-- END game header title -->
+<div class="row game-div" data-equalizer> <!-- game stuff -->
+
+<div class="large-4 medium-4 columns user-game" data-equalizer-watch> <!-- USER div -->
+
+<div><h1>You won!</h1></div>
+
+</div> <!-- END of USER div -->
+<div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
+	<h3>Rounds</h3>
+
+    <table>
+        <thead>
+            <th>Round</th><th><%= @player1_name %></th><th><%= @player2_name %></th><th>Winner</th>
+        </thead>
+        <tbody>
+        <% rounds_counter = 1 %>
+        <% @game_rounds.each do |round| %>
+        <tr>
+        <td><%= rounds_counter %></td>
+        <td><%= round.p1_move %></td>
+        <td><%= round.p2_move %></td>
+        <td><%= round.round_winner %></td>
+        <% rounds_counter += 1 %>
+        <% end %>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div> <!-- END OF game history div -->
+
+
+
+
+<!-- gets round info from database -->
+
+<script></script>

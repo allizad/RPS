@@ -63,6 +63,9 @@ module RPS
       end
     end
 
+    def round_over?
+      return true if p1_move != nil && p2_move != nil
+    end
 
   end
 end

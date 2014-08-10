@@ -168,6 +168,14 @@ module RPS
 
     end
 
+    def update_game_winner(game_winner, game_id)
+        @db.exec_params(%q[
+        UPDATE games
+        SET game_winner = $1
+        WHERE game_id = $2;
+        ], [game_winner, game_id])
+    end
+
 
     #### ROUNDS ####
 
@@ -234,7 +242,7 @@ module RPS
       result.map {|row| build_round(row)}
     end
 
-    def round_winner(winner, round_id)
+    def insert_round_winner(winner, round_id)
       @db.exec_params(%q[
         UPDATE rounds
         SET round_winner = $1
