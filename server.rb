@@ -19,6 +19,9 @@ end
  
 get '/summary' do
   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
+
+  # my_turn_round_objects
+  # not_my_turn_round_objects
   
   @my_turn_rounds = RPS.dbi.my_turn_rounds(session['RPS_session'])
   @game_id_of_my_turn_rounds = @my_turn_rounds.map {|round| round.game_id}
