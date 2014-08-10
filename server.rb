@@ -140,7 +140,7 @@ erb :game
 end
  
  
-get '/signout' do
+post '/signout' do
  session.clear
  redirect to '/'
 end

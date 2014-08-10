@@ -124,34 +124,46 @@ div.game-page-styling {
   background-image: url("../../img/large_hero_summary.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100%; }
+  background-size: cover; }
   div.game-page-styling button.button {
     font-family: 'Raleway', sans-serif;
     letter-spacing: 0.1rem;
     margin-top: 2rem;
-    border-radius: 1rem; }
-    div.game-page-styling button.button .button-no-hover {
-      background-color: transparent; }
-      div.game-page-styling button.button .button-no-hover.chosen {
-        background-color: white;
-        color: #cca347; }
-    div.game-page-styling button.button.move {
-      width: 80%;
-      margin: 0;
-      background-color: transparent;
-      font-size: 1.5rem;
-      border: 2px solid white; }
-      div.game-page-styling button.button.move:hover {
-        background-color: white;
-        color: #cca347; }
-      div.game-page-styling button.button.move.chosen {
-        background-color: white;
-        color: #cca347; }
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    width: 80%; }
     div.game-page-styling button.button.return {
       background-color: #cca347;
-      font-size: 1.5rem; }
+      font-size: 1.5rem;
+      width: 40%; }
       div.game-page-styling button.button.return:hover {
         background-color: #7f662c; }
+    div.game-page-styling button.button.move {
+      width: 80%;
+      color: #cca347;
+      background-color: transparent;
+      border: 2px solid #cca347;
+      letter-spacing: 0.1rem; }
+      div.game-page-styling button.button.move:hover {
+        background-color: #cca347;
+        color: white; }
+  div.game-page-styling button.button.button-no-hover {
+    width: 80%;
+    font-family: 'Raleway', sans-serif;
+    letter-spacing: 0.1rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 0.5rem;
+    color: #cca347;
+    background-color: transparent;
+    border: 2px solid #cca347; }
+    div.game-page-styling button.button.button-no-hover.chosen {
+      background-color: #cca347;
+      color: white; }
+    div.game-page-styling button.button.button-no-hover.not-chosen {
+      background-color: transparent;
+      color: #cca347; }
 
 div.row .game-page {
   margin: 0;
@@ -167,7 +179,8 @@ div.row .game-div {
     padding-bottom: 1.5rem;
     padding-top: 1.5rem;
     font-family: 'Raleway', sans-serif;
-    font-size: 2.5rem; }
+    font-size: 2rem;
+    font-variant: small-caps; }
   div.row .game-div div.user-game a.button {
     font-family: 'Raleway', sans-serif;
     font-style: bold;
@@ -176,32 +189,48 @@ div.row .game-div {
     border-radius: 0.9rem;
     letter-spacing: 0.1rem;
     margin-bottom: 0.5rem; }
-  div.row .game-div div.user-game a.button:hover {
-    background-color: #7f662c; }
-  div.row .game-div div.user-game a.button .disabled {
-    background-color: #7f662c; }
-  div.row .game-div div.user-game a.button .disabled:hover {
-    background-color: #7f662c; }
 
 div.user-game, div.game-history, div.opp-game {
   background-color: rgba(204, 163, 71, 0.9);
-  padding-bottom: 1.5rem; }
+  padding-bottom: 2.5rem; }
+  div.user-game div.white, div.game-history div.white, div.opp-game div.white {
+    height: 60vh; }
 
+div.white {
+  background-color: white;
+  border-radius: 0.45rem;
+  padding-top: 0.6rem; }
+
+div.game-history div.white {
+  padding-top: 1rem; }
 div.game-history table {
+  margin: auto;
   background-color: transparent;
   border: none;
-  letter-spacing: 0.03rem; }
+  letter-spacing: 0.03rem;
+  font-size: 1rem; }
   div.game-history table thead {
-    background-color: transparent; }
-    div.game-history table thead tr th {
-      color: white; }
+    background-color: transparent;
+    border-bottom: 2px solid #cca347; }
+    div.game-history table thead th {
+      color: #b5b5b5;
+      font-size: 1rem; }
   div.game-history table tr {
-    background-color: transparent; }
+    background-color: transparent;
+    border: none;
+    color: #261f0f; }
 
+div.opp-game div.white {
+  padding-top: 1rem;
+  background-image: url("http://www.fillmurray.com/g/300/300");
+  background-repeat: no-repeat;
+  background-size: cover; }
 div.opp-game p {
-  font-size: 2rem;
-  color: white;
-  letter-spacing: 0.2rem; }
+  font-size: 3rem;
+  color: #cca347;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  padding-top: 6rem; }
 
 div.welcome-hero.hero {
   padding-top: 5rem;
@@ -231,31 +260,30 @@ div.new-game {
 
 div.row.gold-background {
   background-color: #cca347;
-  padding: 2rem 2rem 4rem 2rem; }
+  padding: 3rem;
+  padding-bottom: 2rem; }
   div.row.gold-background div.row.overview h3 {
     margin: 0; }
 
-div.your-move, div.opp-move {
-  background-color: white;
+div.your-move div.white, div.opp-move div.white {
+  width: 95%;
   border-radius: 0.45rem;
-  padding: 2rem; }
-  div.your-move h4, div.opp-move h4 {
-    padding-bottom: 1rem;
-    font-variant: small-caps; }
-  div.your-move button.button, div.opp-move button.button {
-    font-family: 'Raleway', sans-serif;
-    letter-spacing: 0.3rem;
-    border: 2px solid #cca347;
-    width: 100%;
-    border-radius: 0.5rem;
-    color: #cca347;
-    background-color: transparent; }
-  div.your-move button.button:hover, div.opp-move button.button:hover {
-    color: #b5b5b5;
-    border-color: #b5b5b5; }
-
-div.median {
-  width: 10%; }
+  padding: 2rem;
+  margin-bottom: 1rem; }
+div.your-move h4, div.opp-move h4 {
+  padding-bottom: 1rem;
+  font-variant: small-caps; }
+div.your-move button.button, div.opp-move button.button {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.1rem;
+  border: 2px solid #cca347;
+  width: 100%;
+  border-radius: 0.5rem;
+  color: #cca347;
+  background-color: transparent; }
+div.your-move button.button:hover, div.opp-move button.button:hover {
+  color: #b5b5b5;
+  border-color: #b5b5b5; }
 
 div.row.summary {
   width: 100%; }

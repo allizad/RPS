@@ -160,40 +160,53 @@ div.game-page-styling {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	// background-height: 10px;
-	background-size: 100%;
+	background-size: cover;
+
 	button.button {
 		font-family: 'Raleway', sans-serif;
 		letter-spacing: 0.1rem;
 		margin-top: 2rem;
 		border-radius: 1rem;
-		.button-no-hover{
-			background-color: transparent;
-			&.chosen{
-				background-color: white;
-				color: $gold;
-			}
-		}
-		&.move{
-			width: 80%;
-			margin: 0;
-			background-color: transparent;
-			font-size: 1.5rem;
-			border: 2px solid white;
-			&:hover{
-				background-color: white;
-				color: $gold;
-			}
-			&.chosen{
-				background-color: white;
-				color: $gold;
-			}
-		}
+		margin-bottom: 0.5rem;
+		font-size: 1.2rem;
+		width: 80%;
 		&.return{
 			background-color: $gold;
 			font-size: 1.5rem;
+			width: 40%;
 			&:hover{
 				background-color: $gold-dark;
 			}
+		}
+		&.move {
+			width: 80%;
+			color: $gold;
+			background-color: transparent;
+			border: 2px solid $gold;
+			letter-spacing: 0.1rem;
+			&:hover{
+				background-color: $gold;
+				color: white;
+			}
+		}
+	}
+	button.button.button-no-hover {
+		width: 80%;
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		margin-top: 2rem;
+		border-radius: 1rem;
+		margin-bottom: 0.5rem;
+		color: $gold;
+		background-color: transparent;
+		border: 2px solid $gold;
+		&.chosen{
+			background-color: $gold;
+			color: white;
+		}
+		&.not-chosen{
+			background-color: transparent;
+			color: $gold;
 		}
 	}
 }
@@ -212,7 +225,8 @@ div.row .game-div {
 	padding-bottom: 1.5rem;
 	padding-top: 1.5rem;
 	font-family: 'Raleway', sans-serif;
-	font-size: 2.5rem;	
+	font-size: 2rem;
+	font-variant: small-caps;
 	}
 	div.user-game a.button {
 		font-family: 'Raleway', sans-serif;
@@ -223,46 +237,57 @@ div.row .game-div {
 		letter-spacing: 0.1rem;
 		margin-bottom: 0.5rem;
 	}
-	div.user-game a.button:hover {
-		background-color: $gold-dark;
-	}
-	div.user-game a.button .disabled {
-		background-color: $gold-dark;
-	}
-	div.user-game a.button .disabled:hover {
-		background-color: $gold-dark;
-	}
 }
 div.user-game, div.game-history, div.opp-game {
 	background-color: rgba(204, 163, 71, 0.9);
-	padding-bottom: 1.5rem;
+	padding-bottom: 2.5rem;
+	div.white {
+		height: 60vh;
+	}
 }
-div.user-game {
-
+div.white {
+	background-color: white;
+	border-radius: 0.45rem;
+	padding-top: 0.6rem;
 }
 div.game-history {
-
+	div.white {
+		padding-top: 1rem;
+	}
 	table {
+		margin: auto;
 		background-color: transparent;
 		border: none;
 		letter-spacing: 0.03rem;
+		font-size: 1rem;
 		thead {
 			background-color: transparent;
-			tr th{
-				color: white;
+			border-bottom: 2px solid $gold;
+			th{
+				color: $light-gray;
+				font-size: 1rem;
 			}
 		}
 		tr{
 			background-color: transparent;
-			// text-color: white;
+			border: none;
+			color: $very-dark-gold;
 		}
 	}
 }
 div.opp-game {
+	div.white{
+		padding-top: 1rem;
+		background-image: url('http://www.fillmurray.com/g/300/300');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 	p {
-		font-size: 2rem;
-		color: white;
+		font-size: 3rem;
+		color: $gold;
 		letter-spacing: 0.2rem;
+		text-align: center;
+		padding-top: 6rem;
 	}
 }
 // ____________________________________________________________________
@@ -301,23 +326,29 @@ div.new-game {
 }
 div.row.gold-background{
 	background-color: $gold;
-	padding: 2rem 2rem 4rem 2rem;
+	padding: 3rem;
+	padding-bottom: 2rem;
 	div.row.overview h3 {
 		margin: 0;
 	}
 }
 div.your-move, div.opp-move {
+	div.white {
+		width: 95%;
+		border-radius: 0.45rem;
+		padding: 2rem;
+		margin-bottom: 1rem;
+		// padding: 2rem;
+	}
 	h4 {
 		padding-bottom: 1rem;
 		font-variant: small-caps;
 	}
-	background-color: white;
-	border-radius: 0.45rem;
-	padding: 2rem;
+
 	// active game button styling
 	button.button {
 		font-family: 'Raleway', sans-serif;
-		letter-spacing: 0.3rem;
+		letter-spacing: 0.1rem;
 		// background-color: $gold-dark;
 		// color: white;
 		border: 2px solid $gold;
@@ -330,9 +361,6 @@ div.your-move, div.opp-move {
 		color: $light-gray;
 		border-color: $light-gray;
 	}
-}
-div.median {
-	width: 10%;
 }
 div.row.summary {
 	width: 100%;

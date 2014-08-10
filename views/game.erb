@@ -7,7 +7,8 @@
 <div class="row game-div" data-equalizer> <!-- game stuff -->
 
 <div class="large-4 medium-4 columns user-game" data-equalizer-watch> <!-- USER div -->
-	<h3>Your Move</h3>
+	<h3>your move</h3>
+    <div class="white">
 <!-- 		<form method="post" action="/move/rock">
 			<div><input class="button" type='submit' value='Rock'/></div>
 		</form>
@@ -22,7 +23,7 @@
     <% moves.each do |m|%>
         <% if @user_move && @user_move != m %>
             <form><button class="button move not-chosen button-no-hover" disabled="disabled"><%= m %></button></form>
-        <% elsif @user_move && @usermove == m %>
+        <% elsif @user_move && @user_move == m %>
             <form><button class="button move chosen button-no-hover" disabled="disabled"><%= m %></button></form>
         <% else %>        
             <form action="/game/<%= @params[:username]%>/<%= @params[:game_id]%>/<%= @active_round.round_id%>/<%= m%>" method="post">
@@ -30,15 +31,17 @@
             </form>
         <% end %>
     <% end %>
+    </div>
 
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
-	<h3>Rounds</h3>
-
-<div class="large centered columns">
-    <table>
+	<h3>rounds</h3>
+<div class="row">
+<div class="ten centered columns">
+<div class="white">
+    <table class="table">
         <thead>
-            <th>round</th><th>your move</th><th>their move</th><th>winner</th>
+            <th>round</th><th>you</th><th>them</th><th>winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>
@@ -52,13 +55,17 @@
         </tbody>
     </table>
 </div>
+</div>
+</div>
 
 
 </div> <!-- END OF game history div -->
 
 <div class="large-4 medium-4 columns opp-game" data-equalizer-watch> <!-- Opponent Div -->
-	<h3>Opponent Move</h3>
+	<h3>opponent move</h3>
+    <div class="white">
 	<p>waiting</p>
+    </div>
 </div><!-- end of opponent div -->
 </div> <!-- END OF game-div -->
 </div>
