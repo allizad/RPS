@@ -9,6 +9,8 @@ module RPS
           return {:success? => false, :error => "Username already exists. Please choose another username."}
         elsif params['password'] != params['password_confirmation']
           return {:success? => false, :error => "Passwords don't match.  Please try again."}
+        elsif params['username'] == "tie"
+          return {:success? => false, :error => "You cannot have the username 'tie'.  Please choose another username."}
         end
 
         @user = RPS::User.new(params['username'])

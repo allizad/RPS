@@ -128,8 +128,10 @@ module RPS
       result = @db.exec_params(%q[
         SELECT *
         FROM games
-        WHERE game_winner IS NOT NULL;
-        ])
+        WHERE player1 = $1
+        OR player2 = $1
+        AND game_winner IS NOT NULL;
+        ], [username])
 
       result.map {|row| build_game(row)}
     end
