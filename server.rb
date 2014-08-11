@@ -38,7 +38,7 @@ get '/summary' do
 
   @win_hash = RPS.dbi.win_count(@user.username)
   @lose_hash = RPS.dbi.lose_count(@user.username)
-
+  # binding.pry
   erb :summary
 end
  
