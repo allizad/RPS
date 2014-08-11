@@ -64,8 +64,8 @@ module RPS
       result = @db.exec(%Q[
         SELECT *
         FROM users
-        WHERE username = '#{username}';
-      ])
+        WHERE username = $1;
+      ], [username])
  
       if result.count > 0
         true
@@ -98,7 +98,7 @@ module RPS
         SELECT * FROM games WHERE game_id = $1;
       ], [game_id])
       game_object = build_game(result.first)
-      game_object       
+      game_object     
     end
  
     def start_game(player1_username, player2_username)
@@ -107,8 +107,7 @@ module RPS
       VALUES ($1, $2)
       RETURNING *;
       ], [player1_username, player2_username])
- 
-      # return result.first
+
       build_game(result.first)
     end
 
@@ -154,7 +153,6 @@ module RPS
       result.first
     end
 
-
     def game_over?(game_id, player1, player2)
       result = @db.exec(%Q[
         SELECT round_winner
@@ -177,7 +175,6 @@ module RPS
         ], [game_id])
       
       result.map{|x| x['round_winner']}
-
     end
 
     def find_game_by_id(game_id)
@@ -308,11 +305,11 @@ module RPS
     # returns: [{count=> #, player1=> 'str', player2=> 'str', game_winner=> 'str'}]
     def win_count(username)
       result = @db.exec_params(%q[
-        select count(game_id), player1, player2, game_winner
-        from games 
-        where (player1 = $1 or player2 = $1)
+        SELECT count(game_id), player1, player2, game_winner
+        FROM games 
+        WHERE (player1 = $1 or player2 = $1)
         AND game_winner IS NOT NULL
-        group by game_winner, player1, player2;
+        GROUP BY game_winner, player1, player2;
         ], [username])
 
       win_data = {}
@@ -337,7 +334,7 @@ module RPS
         FROM games
         WHERE (player1 = $1 or player2 = $1)
         AND game_winner IS NOT NULL
-        group by game_winner, player1, player2;
+        GROUP BY game_winner, player1, player2;
         ], [username])
 
       loss_data = {}

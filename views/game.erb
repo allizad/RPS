@@ -9,15 +9,7 @@
 <div class="large-4 medium-4 columns user-game" data-equalizer-watch> <!-- USER div -->
 	<h3>your move</h3>
     <div class="white">
-<!-- 		<form method="post" action="/move/rock">
-			<div><input class="button" type='submit' value='Rock'/></div>
-		</form>
-		<form method="post" action="/move/paper">
-			<div><input class="button" type='submit' value='Paper'/></div>
-		</form>
-		<form method="post" action="/move/scissors">
-			<div><input class="button" type='submit' value='Scissors'/></div>
-		</form> -->
+
         <!-- if user move dne - do this -->
     <% moves=["rock", "paper", "scissors"]%>
     <% moves.each do |m|%>
@@ -41,7 +33,7 @@
 <div class="white">
     <table class="table">
         <thead>
-            <th>Round</th><th><%= @current_game.player1 %></th><th><%= @current_game.player2 %></th><th>Winner</th>
+            <th>round</th><th><%= @current_game.player1 %></th><th><%= @current_game.player2 %></th><th>winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>

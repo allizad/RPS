@@ -92,19 +92,17 @@ get '/game/:username/:game_id' do
   # deletes that active round so moves don't display until the round is over
   @game_rounds.delete(@active_round)
 
-  if !@active_round
+  if !@active_round && @current_game.game_winner == nil
     @active_round = RPS.dbi.start_round(params[:game_id].to_i, @current_game.player1, @current_game.player2)
   end
-
-  @user_name = session['RPS_session']
-  @user_move = @active_round.move_for(@user_name)
 
   if @current_game.game_over?
     erb :game_over
   else
+    @user_name = session['RPS_session']
+    @user_move = @active_round.move_for(@user_name)
     erb :game
   end
-
 end
 
 post '/game/:username/:game_id/:round_id/:move' do
@@ -122,7 +120,6 @@ post '/game/:username/:game_id/:round_id/:move' do
   end
 
   redirect to "/game/#{params[:username]}/#{params[:game_id]}"
-
 end
  
 get '/game' do

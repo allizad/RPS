@@ -130,14 +130,6 @@ module RPS
       RPS.dbi.not_my_turn_rounds(username)
     end
 
-    # def opponent_name(username)
-    #   if username == player1
-    #     return player2
-    #   elsif username == player2
-    #     return player1
-    #   end
-    # end
-
     def game_id_and_opponent_hash(username)
         hash = {}
         if username == player1
@@ -149,7 +141,6 @@ module RPS
         end
         return hash
     end
-
 
   end
 end
