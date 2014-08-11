@@ -1,13 +1,11 @@
+<%  winnerloser = @current_game.game_winner == @user_name ? 'won' : 'lost' %>
 
-<% if @current_game.game_winner == @user %>
-<div class="row game-over-page won">
-<% else %>
-<div class="row game-over-page lost">
-<% end %>
+<div class="row game-over-page <%= winnerloser %>">
 	
 	<div class="row hero"> 
 		<h1><%= @current_game.game_winner %> won the game!</h1>
 	</div> 
+
 <div class="row"> 
     <div class="large-3 medium-3 columns"><br></div>
     <div class="large-6 medium-6 columns rounds-table">

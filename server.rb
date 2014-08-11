@@ -99,7 +99,12 @@ get '/game/:username/:game_id' do
   @user_name = session['RPS_session']
   @user_move = @active_round.move_for(@user_name)
 
-  erb :game
+  if @current_game.game_over?
+    erb :game_over
+  else
+    erb :game
+  end
+
 end
 
 post '/game/:username/:game_id/:round_id/:move' do
@@ -113,27 +118,15 @@ post '/game/:username/:game_id/:round_id/:move' do
     @round.update_round_winner
     if @game.game_over?
       @game.update_game_winner
-      redirect to "/game/#{params[:username]}/#{params[:game_id]}/game-over"
-    else
-      redirect to "/game/#{params[:username]}/#{params[:game_id]}"
     end
-  else
-    redirect to "/game/#{params[:username]}/#{params[:game_id]}"
   end
 
-end
+  redirect to "/game/#{params[:username]}/#{params[:game_id]}"
 
-get '/game/:username/:game_id/game-over' do
-
-  @current_game = RPS.dbi.get_game_by_id(params[:game_id])
-  @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
-  @user = session['RPS_session']
-erb :game_over
 end
  
 get '/game' do
- 
-erb :game
+  erb :game
 end
  
  
