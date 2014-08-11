@@ -60,14 +60,6 @@
 <div class="row past-games">
 	<div class="row past-games-title">
 		<h3>past games</h3>
-		
-		<% @past_game_data.each do |x| %>
-				<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>/game-over" method="get">
-					<button class="button"> you VS <%= x[:opponent]%> </button>
-				</form>
-		<%end%>	
-
-
 	</div>
 
 	<div class="row">
@@ -76,9 +68,9 @@
 		<div class="row table">
 		<div class="medium-3 large-3 columns"><br></div>
 		<table class="medium-6 large-6 columns">
-			<tr><td>chris</td><td>10</td></tr>
-			<tr><td>allizad</td><td>0</td></tr>
-			<tr><td>bob</td><td>0</td></tr>
+		<% @win_hash.each do |opp, count|%>
+			<tr><td><%= opp %></td><td> <%= count%></td></tr>
+		<% end %>
 		</table>
 		<div class="medium-3 large-3 columns"><br></div>
 		</div>
@@ -91,9 +83,9 @@
 		<div class="row table">
 		<div class="medium-3 large-3 columns"><br></div>
 		<table class="medium-6 large-6 columns">
-			<tr><td>chris</td><td>10</td></tr>
-			<tr><td>allizad</td><td>0</td></tr>
-			<tr><td>bob</td><td>0</td></tr>
+			<% @lose_hash.each do |opp, count|%>
+				<tr><td><%= opp %></td><td> <%= count%></td></tr>
+			<% end %>
 		</table>
 		<div class="medium-3 large-3 columns"><br></div>
 		</div>

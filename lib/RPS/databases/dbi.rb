@@ -303,7 +303,58 @@ module RPS
       end
     end
 
+    # returns: [{count=> #, player1=> 'str', player2=> 'str', game_winner=> 'str'}]
+    def win_count(username)
+      result = @db.exec_params(%q[
+        select count(game_id), player1, player2, game_winner
+        from games 
+        where (player1 = $1 or player2 = $1)
+        AND game_winner IS NOT NULL
+        group by game_winner, player1, player2;
+        ], [username])
 
+      win_data = {}
+
+      result.each do |data|
+        if data['player1'] == username
+          opponent = data['player2']
+        else
+          opponent = data['player1']
+        end
+
+        if data['game_winner'] == username
+          win_data[opponent] = (win_data[opponent] || 0) + data['count'].to_i
+        end
+      end
+      win_data
+    end
+
+    def lose_count(username)
+      result = @db.exec_params(%q[
+        SELECT count(game_id), player1, player2, game_winner
+        FROM games
+        WHERE (player1 = $1 or player2 = $1)
+        AND game_winner IS NOT NULL
+        group by game_winner, player1, player2;
+        ], [username])
+
+      loss_data = {}
+
+      result.each do |data|
+        if data['player1'] == username
+          opponent = data['player2']
+        else
+          opponent = data['player1']  
+        end
+
+        if data['game_winner'] != username
+          loss_data[opponent] = (loss_data[opponent] || 0) + data['count'].to_i
+        end
+      end
+
+      loss_data
+    end
+  # end of dbi class
   end
 
 
