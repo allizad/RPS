@@ -2,13 +2,11 @@
 <div class="row game-page">
 	
 	<div class="row hero"> <!-- game header title -->
-		<h1>SHOOT!</h1>
+		<h1><%= @current_game.game_winner %> won the game!</h1>
 	</div> <!-- END game header title -->
 <div class="row game-div" data-equalizer> <!-- game stuff -->
 
 <div class="large-4 medium-4 columns user-game" data-equalizer-watch> <!-- USER div -->
-
-<div><h1>You won!</h1></div>
 
 </div> <!-- END of USER div -->
 <div class="large-4 medium-4 columns game-history" data-equalizer-watch> <!-- game history div -->
@@ -16,7 +14,7 @@
 
     <table>
         <thead>
-            <th>Round</th><th><%= @player1_name %></th><th><%= @player2_name %></th><th>Winner</th>
+            <th>Round</th><th><%= @game_rounds.first.player1 %></th><th><%= @game_rounds.first.player2 %></th><th>Winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>

@@ -19,18 +19,22 @@ end
  
 get '/summary' do
   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
-  
-  @my_turn_rounds = RPS.dbi.my_turn_rounds(session['RPS_session'])
-  @game_id_of_my_turn_rounds = @my_turn_rounds.map {|round| round.game_id}
-  @my_turn_data = []
-  @game_id_of_my_turn_rounds.each do |game_id|
-    hash = {}
-    hash[:game_id] = game_id
-    hash[:opponent] = RPS.dbi.opponent_name(session['RPS_session'], game_id)
-    @my_turn_data << hash
+
+  @my_turn_round_objects = RPS::Round.my_turn_rounds(session['RPS_session'])
+  @not_my_turn_round_objects = RPS::Round.not_my_turn_rounds(session['RPS_session'])
+  @past_game_objects = RPS::Game.past_games(session['RPS_session'])
+
+  @my_turn_data = @my_turn_round_objects.map do |round|
+    round.game_id_and_opponent_hash(session['RPS_session'])
   end
 
-  @past_games = RPS.dbi.get_past_games_for_username(session['RPS_session'])
+  @not_my_turn_data = @not_my_turn_round_objects.map do |round|
+    round.game_id_and_opponent_hash(session['RPS_session'])
+  end
+
+  @past_game_data = @past_game_objects.map do |game|
+    game.game_id_and_opponent_hash(session['RPS_session'])
+  end
 
   erb :summary
 end
@@ -118,6 +122,7 @@ end
 
 get '/game/:username/:game_id/game-over' do
 
+  @current_game = RPS.dbi.get_game_by_id(params[:game_id])
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
 
 erb :game_over

@@ -30,7 +30,7 @@
 			<h4>throw your move</h4>
 				<% @my_turn_data.each do |x| %>
 					<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>" method="get">
-						<button class="button"> VS <%= x[:opponent]%> </button>
+						<button class="button"> you VS <%= x[:opponent]%> </button>
 					</form>
 				<%end%>
 			</div>
@@ -41,6 +41,12 @@
 	<div class="large-6 medium-6 columns opp-move" data-equalizer-watch>
 		<div class="white">
 			<h4>waiting for opponent</h4>
+				<% @not_my_turn_data.each do |x| %>
+					<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>" method="get">
+						<button class="button"> you VS <%= x[:opponent]%> </button>
+					</form>
+				<%end%>
+			
 
 			<!-- active game buttons - waiting for user -->
 			<!-- form populated erb -->
@@ -54,6 +60,14 @@
 <div class="row past-games">
 	<div class="row past-games-title">
 		<h3>past games</h3>
+		
+		<% @past_game_data.each do |x| %>
+				<form action="/game/<%= x[:opponent] %>/<%= x[:game_id] %>/game-over" method="get">
+					<button class="button"> you VS <%= x[:opponent]%> </button>
+				</form>
+		<%end%>	
+
+
 	</div>
 
 	<div class="row">

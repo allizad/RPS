@@ -130,6 +130,8 @@ module RPS
         FROM games
         WHERE game_winner IS NOT NULL;
         ])
+
+      result.map {|row| build_game(row)}
     end
 
     def get_player1_name(game_id)
@@ -265,6 +267,16 @@ module RPS
         SELECT * FROM rounds
         WHERE player1 = $1 AND p1_move IS NULL
         OR player2 = $1 AND p2_move IS NULL;
+        ], [username])
+
+      result.map {|row| build_round(row)}
+    end
+
+    def not_my_turn_rounds(username)
+      result = @db.exec_params(%q[
+        SELECT * FROM rounds
+        WHERE player1 = $1 AND p2_move IS NULL
+        OR player2 = $1 AND p1_move IS NULL;
         ], [username])
 
       result.map {|row| build_round(row)}
