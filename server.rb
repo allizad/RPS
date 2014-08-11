@@ -36,6 +36,9 @@ get '/summary' do
     game.game_id_and_opponent_hash(session['RPS_session'])
   end
 
+  @win_hash = RPS.dbi.win_count(@user.username)
+  @lose_hash = RPS.dbi.lose_count(@user.username)
+
   erb :summary
 end
  
@@ -124,7 +127,7 @@ get '/game/:username/:game_id/game-over' do
 
   @current_game = RPS.dbi.get_game_by_id(params[:game_id])
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
-
+  @user = session['RPS_session']
 erb :game_over
 end
  

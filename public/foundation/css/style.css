@@ -222,7 +222,7 @@ div.game-history table {
 
 div.opp-game div.white {
   padding-top: 1rem;
-  background-image: url("http://www.fillmurray.com/g/300/300");
+  background-image: url("../../img/watch.png");
   background-repeat: no-repeat;
   background-size: cover; }
 div.opp-game p {
@@ -373,3 +373,54 @@ div.new-game-full {
     border-radius: 1rem; }
   div.new-game-full button, div.new-game-full .button:hover {
     background-color: #7f662c; }
+
+div.game-over-page.won {
+  background-image: url("../../img/win.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%; }
+div.game-over-page.lost {
+  background-image: url("../../img/lose.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%; }
+div.game-over-page h3 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 3.1rem;
+  font-variant: small-caps;
+  letter-spacing: -0.01rem; }
+div.game-over-page div.rounds-table {
+  background-color: rgba(203, 163, 71, 0.6);
+  border-radius: 0.5rem;
+  padding: 2rem; }
+div.game-over-page table {
+  width: 100%; }
+div.game-over-page button, div.game-over-page .button {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 0.1rem;
+  background-color: #cca347;
+  margin-top: 2rem;
+  border-radius: 1rem; }
+  div.game-over-page button:hover, div.game-over-page .button:hover {
+    background-color: #7f662c; }
+div.game-over-page table {
+  font-family: 'Raleway', sans-serif;
+  margin: auto;
+  background-color: transparent;
+  border: none;
+  letter-spacing: 0.03rem;
+  font-size: 1rem; }
+  div.game-over-page table thead {
+    background-color: transparent;
+    border-bottom: 2px solid #cca347; }
+    div.game-over-page table thead th {
+      color: white;
+      letter-spacing: 0.1rem;
+      font-size: 1rem;
+      text-align: center; }
+  div.game-over-page table tr {
+    background-color: transparent;
+    border: none;
+    color: #261f0f; }

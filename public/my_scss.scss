@@ -278,7 +278,7 @@ div.game-history {
 div.opp-game {
 	div.white{
 		padding-top: 1rem;
-		background-image: url('http://www.fillmurray.com/g/300/300');
+		background-image: url('../../img/watch.png');
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
@@ -472,7 +472,72 @@ div.new-game-full {
 		background-color: $gold-dark;
 	}
 }
-
+// ____________________________________________________________________
+//game-over.erb PAGE STYLING
+// ____________________________________________________________________
+div.game-over-page{
+	&.won {
+		background-image: url('../../img/win.png');
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: 50% 50%;
+	}
+	&.lost {
+		background-image: url('../../img/lose.png');
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: 50% 50%;
+	}
+	h3 {
+		font-family: 'Josefin Sans', sans-serif;
+		font-size: 3.1rem;
+		font-variant: small-caps;
+		letter-spacing: -0.01rem;
+	}
+	div.rounds-table {
+		background-color: rgba(203, 163, 71, 0.6);
+		border-radius: 0.5rem;
+		padding: 2rem;
+	}
+	table {
+		width: 100%;
+	}
+	button, .button {
+		font-family: 'Raleway', sans-serif;
+		letter-spacing: 0.1rem;
+		background-color: $gold;
+		margin-top: 2rem;
+		border-radius: 1rem;
+			&:hover{
+		background-color: $gold-dark;
+		}
+	}
+	table {
+	font-family: 'Raleway', sans-serif;
+	margin: auto;
+	background-color: transparent;
+	border: none;
+	letter-spacing: 0.03rem;
+	font-size: 1rem;
+	thead {
+		background-color: transparent;
+		border-bottom: 2px solid $gold;
+		th{
+			color: white;
+			letter-spacing: 0.1rem;
+			font-size: 1rem;
+			text-align: center;
+		}
+	}
+	tr{
+		background-color: transparent;
+		border: none;
+		color: $very-dark-gold;
+	}
+	}
+}
 
 
 
