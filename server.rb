@@ -122,6 +122,7 @@ end
 
 get '/game/:username/:game_id/game-over' do
 
+  @current_game = RPS.dbi.get_game_by_id(params[:game_id])
   @game_rounds = RPS.dbi.get_all_rounds_for_game_id(params[:game_id])
 
 erb :game_over

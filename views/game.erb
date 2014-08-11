@@ -41,7 +41,7 @@
 <div class="white">
     <table class="table">
         <thead>
-            <th>Round</th><th><%= @game_rounds.first.player1 %></th><th><%= @game_rounds.first.player2 %></th><th>Winner</th>
+            <th>Round</th><th><%= @current_game.player1 %></th><th><%= @current_game.player2 %></th><th>Winner</th>
         </thead>
         <tbody>
         <% rounds_counter = 1 %>
