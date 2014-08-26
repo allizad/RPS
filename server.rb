@@ -28,6 +28,7 @@ get '/summary' do
     round.game_id_and_opponent_hash(session['RPS_session'])
   end
 
+
   @not_my_turn_data = @not_my_turn_round_objects.map do |round|
     round.game_id_and_opponent_hash(session['RPS_session'])
   end
