@@ -1,0 +1,18 @@
+<h2>New Book</h2>
+<form action="/" method="post">
+	Title: <input type="text" name="title" placeholder="Title"><br/>
+	Category: <input type="text" name="category" placeholder="Category"><br/>
+	<input type="button" value="submit">
+</form>
+
+<h2>New Book</h2>
+<%= form_tag("/"), method: "post" do %>
+	<%= label_tag('title', 'Title:') %>
+	<%= text_field_tag('title') %><br/>
+	
+	<%= label_tag('category', 'Category:') %>
+	<%= text_field_tag('category') %><br />
+
+	<%= submit_tag("submit") %>
+<%= end %>
+

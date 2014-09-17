@@ -142,5 +142,11 @@ module RPS
         return hash
     end
 
+    def create_hash(array_of_objects, username)
+      array_of_objects.map do |x|
+        x.game_id_and_opponent_hash(username)
+      end
+    end
+
   end
 end

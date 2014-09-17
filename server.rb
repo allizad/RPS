@@ -16,7 +16,7 @@ get '/' do
  
   erb :index
 end
- 
+
 get '/summary' do
   @user = RPS.dbi.get_user_by_username(session['RPS_session'])
 
@@ -24,6 +24,22 @@ get '/summary' do
   @not_my_turn_round_objects = RPS::Round.not_my_turn_rounds(session['RPS_session'])
   @past_game_objects = RPS::Game.past_games(session['RPS_session'])
 
+  # @my_turn_data = @my_turn_round_objects.create_hash
+
+  # TALK TO NICK ABOUT THE NEXT 11 LINES OF CODE
+  # DAT SHIT CRAY
+  # rounds = {
+  #   mine: @my_turn_round_objects,
+  #   theirs: @not_my_turn_round_objects,
+  #   game_over: @past_game_objects
+  # }
+
+  # prep_for_view = ->(x) { x.game_id_and_opponent_hash(session['RPS_session']) }
+
+  # rounds.each_pair do |k, v|
+  #   rounds[k] = v.map!(&prep_for_view)
+  # end
+  
   @my_turn_data = @my_turn_round_objects.map do |round|
     round.game_id_and_opponent_hash(session['RPS_session'])
   end
@@ -40,6 +56,12 @@ get '/summary' do
   @lose_hash = RPS.dbi.lose_count(@user.username)
 
   erb :summary
+
+  # erb :summary, :locals => {
+  #   my_turn_data: rounds[:mine],
+  #   not_my_turn_data: rounds[:theirs],
+  #   past_game_data: rounds[:game_over]
+  # }
 end
  
 # Sign in - checks for user and password, goes to summary
@@ -97,6 +119,7 @@ get '/game/:username/:game_id' do
   end
 
   if @current_game.game_over?
+    @user_name = session['RPS_session']
     erb :game_over
   else
     @user_name = session['RPS_session']
